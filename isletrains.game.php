@@ -18,8 +18,9 @@
 
 
 require_once( APP_GAMEMODULE_PATH.'module/table/table.game.php' );
-
-
+require_once('modules/constants.inc.php');
+require_once('modules/php/iotIslandManager.class.php');
+require_once('modules/php/iotPlayerManager.class.php');
 class IsleTrains extends Table
 {
 	function __construct( )
@@ -39,7 +40,10 @@ class IsleTrains extends Table
             //    "my_first_game_variant" => 100,
             //    "my_second_game_variant" => 101,
             //      ...
-        ) );        
+        ) );
+
+        $this->islandManager = new IsleOfTrainsIslandManager($this);
+        $this->playerManager = new IsleOfTrainsPlayerManager($this);
 	}
 	
     protected function getGameName( )
@@ -56,26 +60,9 @@ class IsleTrains extends Table
         the game is ready to be played.
     */
     protected function setupNewGame( $players, $options = array() )
-    {    
-        // Set the colors of the players with HTML color code
-        // The default below is red/green/blue/orange/brown
-        // The number of colors defined here must correspond to the maximum number of players allowed for the gams
-        $gameinfos = self::getGameinfos();
-        $default_colors = $gameinfos['player_colors'];
- 
-        // Create players
-        // Note: if you added some extra field on "player" table in the database (dbmodel.sql), you can initialize it there.
-        $sql = "INSERT INTO player (player_id, player_color, player_canal, player_name, player_avatar) VALUES ";
-        $values = array();
-        foreach( $players as $player_id => $player )
-        {
-            $color = array_shift( $default_colors );
-            $values[] = "('".$player_id."','$color','".$player['player_canal']."','".addslashes( $player['player_name'] )."','".addslashes( $player['player_avatar'] )."')";
-        }
-        $sql .= implode( $values, ',' );
-        self::DbQuery( $sql );
-        self::reattributeColorsBasedOnPreferences( $players, $gameinfos['player_colors'] );
-        self::reloadPlayersBasicInfos();
+    {
+        $this->playerManager->setupNewGame($players);
+        $this->islandManager->setupNewGame(count($this->playerManager->getPlayers()));
         
         /************ Start the game initialization *****/
 
@@ -106,19 +93,16 @@ class IsleTrains extends Table
         _ when a player refreshes the game page (F5)
     */
     protected function getAllDatas()
-    {
-        $result = array();
-    
+    {    
         $current_player_id = self::getCurrentPlayerId();    // !! We must only return informations visible by this player !!
-    
-        // Get information about players
-        // Note: you can retrieve some extra field you added for "player" table in "dbmodel.sql" if you need it.
-        $sql = "SELECT player_id id, player_score score FROM player ";
-        $result['players'] = self::getCollectionFromDb( $sql );
-  
-        // TODO: Gather all information about current game situation (visible by player $current_player_id).
-  
-        return $result;
+
+        $gamedata = [
+            'constants' => get_defined_constants(true)['user'],
+            'islands' => $this->islandManager->getUiData(ISLAND),
+            'playerInfo' => $this->playerManager->getUiData(),
+        ];
+
+        return $gamedata;
     }
 
     /*

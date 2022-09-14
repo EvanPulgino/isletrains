@@ -25,19 +25,22 @@
     Please REMOVE this comment before publishing your game on BGA
 -->
 
-
-This is your game interface. You can edit this HTML in your ".tpl" file.
-
+<div id="iot_layout">
+    <div id="iot_island">
+        <div id="iot_island_slot_7"></div>
+        <div id="iot_island_slot_empty"></div>
+        <div id="iot_island_slot_6"></div>
+        <div id="iot_island_slot_5"></div>
+        <div id="iot_island_slot_4"></div>
+        <div id="iot_island_slot_3"></div>
+        <div id="iot_island_slot_2"></div>
+        <div id="iot_island_slot_1"></div>
+    </div>
+</div>
 
 <script type="text/javascript">
 
-// Javascript HTML templates
-
-/*
-// Example:
-var jstpl_some_game_item='<div class="my_game_item" id="my_game_item_${MY_ITEM_ID}"></div>';
-
-*/
+var jstpl_island = '<div id="iot_island_${ISLAND_ID}" class="iot-island-card ${ISLAND_CLASS}"></div>';
 
 </script>  
 

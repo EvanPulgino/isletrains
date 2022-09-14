@@ -48,25 +48,52 @@
 
 /********* You can start writing your CSS below this line: **********/
 
+/* General Classes */
+.iot-hidden {
+    display: none !important;
+}
 
-/*
-    Example of CSS sprites (a black token and a white token, 20x20px each, embedded in the same "tokens.png" 40x20px image):
+/* Island Layout */
+#iot_island {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 5px;
+    justify-content: center;
+}
 
-    .white_token {
-        background-image: url('img/tokens.png');
-        background-position: 0px 0px;
-    }
-    .black_token {
-        background-image: url('img/tokens.png');
-        background-position: -20px 0px;
-    }
-    .token {
-        width: 20px;
-        height: 20px;
-        background-repeat: none;
-    }
-*/
+.iot-island-slot {
+    text-align: center;
+}
 
+/* Island Cards */
+.iot-island-card{
+    display: inline-block;
+    position: relative;
+    width: 346px;
+    height: 247px;
+    border-radius: 10px;
+    border: 1px solid;
+    box-shadow: 1px 1px 1px 0 #000000a0;
+    background-image: url('img/iotIslandCards.png');
+}
 
+div.iot-island-card:hover {
+    transform: scale(1.05);
+    z-index: 100;
+}
 
+.iot-island-card-1 {background-position: 0 0; }
+.iot-island-card-2 {background-position: 33.33% 0; }
+.iot-island-card-3 {background-position: 0 33.33%; }
+.iot-island-card-4 {background-position: 33.33% 33.33%; }
+.iot-island-card-5 { background-position: 66.67% 0; }
+.iot-island-card-6 {background-position: 66.67% 33.33%; }
+.iot-island-card-7 {background-position: 0 66.67%; }
+.iot-island-card-1-back {background-position: 33.33% 66.66%; }
+.iot-island-card-2-back {background-position: 66.66% 66.66%; }
+.iot-island-card-3-back {background-position: 0 100%; }
+.iot-island-card-4-back { background-position: 33% 100%; }
+.iot-island-card-5-back {background-position: 66.66% 100%; }
+.iot-island-card-6-back {background-position: 100% 0; }
+.iot-island-card-7-back {background-position: 100% 33.33%; }
 

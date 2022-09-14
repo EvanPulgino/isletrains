@@ -15,15 +15,20 @@
  *
  */
 
+var isDebug = window.location.host == 'studio.boardgamearena.com';
+var debug = isDebug ? console.info.bind(window.console) : function(){};
 define([
     "dojo","dojo/_base/declare",
     "ebg/core/gamegui",
-    "ebg/counter"
+    "ebg/counter",
+    g_gamethemeurl + "modules/js/iotIslandManager.js",
+    g_gamethemeurl + "modules/js/iotUtilities.js",
 ],
 function (dojo, declare) {
     return declare("bgagame.isletrains", ebg.core.gamegui, {
         constructor: function(){
-            console.log('isletrains constructor');
+            this.islandManager = new iot.islandManager(this);
+            this.utilities = new iot.utilities(this);
               
             // Here, you can init the global variables of your user interface
             // Example:
@@ -44,14 +49,17 @@ function (dojo, declare) {
             "gamedatas" argument contains all datas retrieved by your "getAllDatas" PHP method.
         */
         
-        setup: function( gamedatas )
+        setup: function( gamedata )
         {
-            console.log( "Starting game setup" );
+            console.log(gamedata);
+            
+            this.utilities.defineGlobalConstants(gamedata.constants);
+            this.islandManager.setup(gamedata);
             
             // Setting up player boards
-            for( var player_id in gamedatas.players )
+            for( var player_id in gamedata.players )
             {
-                var player = gamedatas.players[player_id];
+                var player = gamedata.players[player_id];
                          
                 // TODO: Setting up players boards if needed
             }
