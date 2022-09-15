@@ -46,6 +46,11 @@
 /* Note: you must not use any @import directive */
 
 /* General Classes */
+html {
+    background-image: url('img/iotTable.jpg');
+    font-size: calc(15px + 0.390625vw);
+}
+
 .iot-hidden {
     display: none !important;
 }
