@@ -55,6 +55,15 @@ html {
     display: none !important;
 }
 
+/* Overall Game Layout */
+#iot_layout {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
 /* Island Layout */
 #iot_island {
     display: grid;
@@ -129,6 +138,29 @@ div.iot-island-card:hover {
 .iot-island-card-5-back { background-position: 66.66% 100%; }
 .iot-island-card-6-back { background-position: 100% 0; }
 .iot-island-card-7-back { background-position: 100% 33.33%; }
+
+/* Progress Track */
+.iot-progress-track {
+    display: inline-block;
+    position: relative;
+    height: 77px;
+    border-radius: 5px;
+    border: 1px solid;
+    box-shadow: 1px 1px 1px 0 #000000a0;
+    background-image: url('img/iotProgressTrack.png');
+}
+
+.iot-progress-track-2 {
+    width: 480px;
+}
+
+.iot-progress-track-3 {
+    width: 592px;
+}
+
+.iot-progress-track-4 {
+    width: 706px;
+}
 
 /* Ticket Tiles */
 .iot-ticket-tile {

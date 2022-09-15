@@ -22,6 +22,7 @@ define([
     "ebg/core/gamegui",
     "ebg/counter",
     g_gamethemeurl + "modules/js/iotIslandManager.js",
+    g_gamethemeurl + "modules/js/iotProgressManager.js",
     g_gamethemeurl + "modules/js/iotTicketManager.js",
     g_gamethemeurl + "modules/js/iotUtilities.js",
 ],
@@ -29,6 +30,7 @@ function (dojo, declare) {
     return declare("bgagame.isletrains", ebg.core.gamegui, {
         constructor: function(){
             this.islandManager = new iot.islandManager(this);
+            this.progressManager = new iot.progressManager(this);
             this.ticketManager = new iot.ticketManager(this);
             this.utilities = new iot.utilities(this);
         },
@@ -52,6 +54,7 @@ function (dojo, declare) {
             
             this.utilities.defineGlobalConstants(gamedata.constants);
             this.islandManager.setup(gamedata);
+            this.progressManager.setup(gamedata);
             this.ticketManager.setup(gamedata);
             
             // Setting up player boards

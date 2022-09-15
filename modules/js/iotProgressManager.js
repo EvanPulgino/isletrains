@@ -7,9 +7,9 @@
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  *
- * iotTicketManager.js
+ * iotProgressManager.js
  *
- * Script to manage Ticket tile elements
+ * Script to manage Progess tracker tile element
  *
  */
 
@@ -20,27 +20,13 @@ define([
     'dojo/_base/declare',
     'ebg/core/gamegui',
 ], (dojo, declare, on) => {
-    return declare('iot.ticketManager', ebg.core.gamegui, {
+    return declare('iot.progressManager', ebg.core.gamegui, {
         constructor: function (game) {
             this.game = game;
         },
 
         setup: function (gamedata) {
-            // Create tickets
-            for (let ticketsKey in gamedata.tickets) {
-                const ticket = gamedata.tickets[ticketsKey];
-                const ticketSlot = ticket.locationArg + 1;
-                const ticketDiv = 'iot_island_slot_tiles_' + ticketSlot;
-                this.createTicketTile(ticket, ticketDiv);
-            }
+            dojo.addClass('iot_progress_track', 'iot-progress-track-' + gamedata.playerInfo.length);
         },
-
-        createTicketTile: function (ticket, parentDiv) {
-            debug('Div', parentDiv);
-            this.game.utilities.placeBlock(TICKET_TEMPLATE, parentDiv, {
-                TICKET_ID: ticket.id,
-                TICKET_CLASS: ticket.cssClass,
-            });
-        }
     });
 });
