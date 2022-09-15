@@ -21,6 +21,7 @@ require_once( APP_GAMEMODULE_PATH.'module/table/table.game.php' );
 require_once('modules/constants.inc.php');
 require_once('modules/php/iotIslandManager.class.php');
 require_once('modules/php/iotPlayerManager.class.php');
+require_once('modules/php/iotProgressManager.class.php');
 require_once('modules/php/iotTicketManager.class.php');
 class IsleTrains extends Table
 {
@@ -34,17 +35,13 @@ class IsleTrains extends Table
         // Note: afterwards, you can get/set the global variables with getGameStateValue/setGameStateInitialValue/setGameStateValue
         parent::__construct();
         
-        self::initGameStateLabels( array( 
-            //    "my_first_global_variable" => 10,
-            //    "my_second_global_variable" => 11,
-            //      ...
-            //    "my_first_game_variant" => 100,
-            //    "my_second_game_variant" => 101,
-            //      ...
-        ) );
+        self::initGameStateLabels( array(
+            CURRENT_PROGRESS => 10,
+        ));
 
         $this->islandManager = new IsleOfTrainsIslandManager($this);
         $this->playerManager = new IsleOfTrainsPlayerManager($this);
+        $this->progressManager = new IsleOfTrainsProgressManager($this);
         $this->ticketManager = new IsleOfTrainsTicketManager($this);
 	}
 	
@@ -64,7 +61,9 @@ class IsleTrains extends Table
     protected function setupNewGame( $players, $options = array() )
     {
         $this->playerManager->setupNewGame($players);
+
         $this->islandManager->setupNewGame(count($players));
+        $this->progressManager->setupNewGame();
         $this->ticketManager->setupNewGame();
         
         // Init global values with their initial values
@@ -99,6 +98,7 @@ class IsleTrains extends Table
 
         $gamedata = [
             'constants' => get_defined_constants(true)['user'],
+            'currentProgress' => $this->progressManager->getCurrentProgress(),
             'islands' => $this->islandManager->getUiData(ISLAND),
             'playerInfo' => $this->playerManager->getUiData(),
             'tickets' => $this->ticketManager->getUiData(),

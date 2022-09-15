@@ -36,7 +36,6 @@ define([
         },
 
         createTicketTile: function (ticket, parentDiv) {
-            debug('Div', parentDiv);
             this.game.utilities.placeBlock(TICKET_TEMPLATE, parentDiv, {
                 TICKET_ID: ticket.id,
                 TICKET_CLASS: ticket.cssClass,

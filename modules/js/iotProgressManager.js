@@ -27,6 +27,11 @@ define([
 
         setup: function (gamedata) {
             dojo.addClass('iot_progress_track', 'iot-progress-track-' + gamedata.playerInfo.length);
+            this.createTrain('iot_progress_track_space_' + gamedata.currentProgress);
         },
+
+        createTrain: function (parentDiv) {
+            this.game.utilities.placeBlock(TRAIN_TEMPLATE, parentDiv, { });
+        }
     });
 });

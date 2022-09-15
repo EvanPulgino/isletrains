@@ -60,6 +60,11 @@ define('TYPE_ARG', 'type_arg');
 define('ZOMBIE', 'zombie');
 
 /**
+ * GLOBAL VARIABLES
+ */
+define('CURRENT_PROGRESS', 'currentProgress');
+
+/**
  * FLIPPED STATUS
  */
 define('UNFLIPPED', 1);
@@ -101,3 +106,4 @@ define('RESEARCH_STATION', 7);
  */
 define('ISLAND_TEMPLATE', 'jstpl_island');
 define('TICKET_TEMPLATE', 'jstpl_ticket');
+define('TRAIN_TEMPLATE', 'jstpl_train');

@@ -83,6 +83,16 @@ html {
     padding: 5px;
 }
 
+/* Progress Track Layout */
+#iot_progress_track_space_0 { left: -100px; position: relative; }
+#iot_progress_track_space_1 { left: 25px; position: relative; }
+#iot_progress_track_space_2 { left: 135px; position: relative; }
+#iot_progress_track_space_3 { left: 250px; position: relative; }
+#iot_progress_track_space_4 { left: 360px; position: relative; }
+#iot_progress_track_space_5 { left: 473px; position: relative; }
+#iot_progress_track_space_6 { left: 587px; position: relative; }
+
+
 /* Destination Tiles */
 .iot-destination-tile {
     display: inline-block;
@@ -160,6 +170,20 @@ div.iot-island-card:hover {
 
 .iot-progress-track-4 {
     width: 706px;
+}
+
+/* Progress Train */
+.iot-progress-train {
+    display: inline-block;
+    position: relative;
+    width: 94px;
+    height: 65px;
+    background-image: url('img/iotTrain.png');
+}
+
+div.iot-progress-train:hover {
+    transform: scale(1.05);
+    z-index: 100;
 }
 
 /* Ticket Tiles */
