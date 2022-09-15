@@ -56,7 +56,7 @@
 /* Island Layout */
 #iot_island {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto auto;
     padding: 5px;
     justify-content: center;
 }
@@ -64,6 +64,30 @@
 .iot-island-slot {
     text-align: center;
 }
+
+/* Destination Tiles */
+.iot-destination-tile {
+    display: inline-block;
+    position: relative;
+    width: 313px;
+    height: 66px;
+    border-radius: 10px;
+    border: 1px solid;
+    box-shadow: 1px 1px 1px 0 #000000a0;
+    background-image: url('img/iotDestinationTiles.png');
+}
+
+div.iot-destination-tile:hover {
+    transform: scale(1.05);
+    z-index: 100;
+}
+
+.iot-destination-tile-alpine-lodge { background-position: 0 0; }
+.iot-destination-tile-billingtons { background-position: 0 20%; }
+.iot-destination-tile-cactus-mines { background-position: 0 80%; }
+.iot-destination-tile-camp-eagle { background-position: 0 40%; }
+.iot-destination-tile-devon-city { background-position: 0 100%; }
+.iot-destination-tile-flint-beach { background-position: 0 60%; }
 
 /* Island Cards */
 .iot-island-card{

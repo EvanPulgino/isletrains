@@ -27,14 +27,34 @@
 
 <div id="iot_layout">
     <div id="iot_island">
+        <div id="iot_island_slot_empty"></div>
         <div id="iot_island_slot_7"></div>
         <div id="iot_island_slot_empty"></div>
+        <div id="iot_island_slot_empty"></div>
+        <div id="iot_island_slot_tiles_6">
+            <div id="io_destination_tile_6" class="iot-destination-tile iot-destination-tile-alpine-lodge"></div>
+        </div>
         <div id="iot_island_slot_6"></div>
         <div id="iot_island_slot_5"></div>
+        <div id="iot_island_slot_tiles_5">
+            <div id="io_destination_tile_5" class="iot-destination-tile iot-destination-tile-billingtons"></div>
+        </div>
+        <div id="iot_island_slot_tiles_4">
+            <div id="io_destination_tile_4" class="iot-destination-tile iot-destination-tile-cactus-mines"></div>
+        </div>
         <div id="iot_island_slot_4"></div>
         <div id="iot_island_slot_3"></div>
+        <div id="iot_island_slot_tiles_3">
+            <div id="io_destination_tile_3" class="iot-destination-tile iot-destination-tile-devon-city"></div>
+        </div>
+        <div id="iot_island_slot_tiles_2">
+            <div id="io_destination_tile_2" class="iot-destination-tile iot-destination-tile-camp-eagle"></div>
+        </div>
         <div id="iot_island_slot_2"></div>
         <div id="iot_island_slot_1"></div>
+        <div id="iot_island_slot_tiles_1">
+            <div id="io_destination_tile_1" class="iot-destination-tile iot-destination-tile-flint-beach"></div>
+        </div>
     </div>
 </div>
 

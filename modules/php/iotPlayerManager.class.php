@@ -36,7 +36,7 @@ class IsleOfTrainsPlayerManager extends APP_GameClass
         $sql = "INSERT INTO player (player_id, player_color, player_canal, player_name, player_avatar) VALUES";
         foreach($players as $playerId => $player) {
             $color = array_shift($defaultColors);
-            $values[] = "('" . $playerId . "','$color','" . $player['player_canal'] . "','" . addslashes($player['player_name']) . "')";
+            $values[] = "('" . $playerId . "','$color','" . $player['player_canal'] . "','" . addslashes($player['player_name']) . "','" . addslashes($player['player_avatar']) . "')";
         }
         $sql .= implode($values, ',');
         self::DbQuery($sql);

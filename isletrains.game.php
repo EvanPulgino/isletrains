@@ -62,10 +62,8 @@ class IsleTrains extends Table
     protected function setupNewGame( $players, $options = array() )
     {
         $this->playerManager->setupNewGame($players);
-        $this->islandManager->setupNewGame(count($this->playerManager->getPlayers()));
+        $this->islandManager->setupNewGame(count($players));
         
-        /************ Start the game initialization *****/
-
         // Init global values with their initial values
         //self::setGameStateInitialValue( 'my_first_global_variable', 0 );
         
