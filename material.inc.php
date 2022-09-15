@@ -160,5 +160,332 @@ $this->island = array(
   ),
 );
 
-
+/**
+ * TICKET TILES
+ */
+$this->ticket = array(
+  1 => array(
+    TICKET_SPACES => array(
+      array(
+        ORDER => 1,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 5
+          )
+        )
+      ),
+      array(
+        ORDER => 2,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 4
+          )
+        )
+      ),
+      array(
+        ORDER => 3,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 3
+          )
+        )
+      )
+    )
+  ),
+  2 => array(
+    TICKET_SPACES => array(
+      array(
+        ORDER => 1,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 2
+          ),
+          array(
+            ACTION_TYPE => LOAD,
+            ACTION_VALUE => 1
+          )
+        )
+      ),
+      array(
+        ORDER => 2,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 1
+          ),
+          array(
+            ACTION_TYPE => LOAD,
+            ACTION_VALUE => 1
+          )
+        )
+      ),
+      array(
+        ORDER => 3,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => LOAD,
+            ACTION_VALUE => 1
+          )
+        )
+      )
+    )
+  ),
+  3 => array(
+    TICKET_SPACES => array(
+      array(
+        ORDER => 1,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 5
+          )
+        )
+      ),
+      array(
+        ORDER => 2,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 2
+          ),
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 2
+          )
+        )
+      ),
+      array(
+        ORDER => 3,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 2
+          )
+        )
+      )
+    )
+  ),
+  4 => array(
+    TICKET_SPACES => array(
+      array(
+        ORDER => 1,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 2
+          ),
+          array(
+            ACTION_TYPE => BUILD,
+            ACTION_VALUE => 1
+          )
+        )
+      ),
+      array(
+        ORDER => 2,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 1
+          ),
+          array(
+            ACTION_TYPE => BUILD,
+            ACTION_VALUE => 1
+          )
+        )
+      ),
+      array(
+        ORDER => 3,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => BUILD,
+            ACTION_VALUE => 1
+          )
+        )
+      )
+    )
+  ),
+  5 => array(
+    TICKET_SPACES => array(
+      array(
+        ORDER => 1,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 4
+          )
+        )
+      ),
+      array(
+        ORDER => 2,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 3
+          )
+        )
+      ),
+      array(
+        ORDER => 3,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 2
+          )
+        )
+      )
+    )
+  ),
+  6 => array(
+    TICKET_SPACES => array(
+      array(
+        ORDER => 1,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 4
+          )
+        )
+      ),
+      array(
+        ORDER => 2,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 2
+          ),
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 2
+          )
+        )
+      ),
+      array(
+        ORDER => 3,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 3
+          )
+        )
+      )
+    )
+  ),
+  7 => array(
+    TICKET_SPACES => array(
+      array(
+        ORDER => 1,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS_DISCARD,
+            ACTION_VALUE => 3
+          )
+        )
+      ),
+      array(
+        ORDER => 2,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS_DISCARD,
+            ACTION_VALUE => 2
+          )
+        )
+      ),
+      array(
+        ORDER => 3,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS_DISCARD,
+            ACTION_VALUE => 1
+          )
+        )
+      )
+    )
+  ),
+  8 => array(
+    TICKET_SPACES => array(
+      array(
+        ORDER => 1,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 3
+          ),
+          array(
+            ACTION_TYPE => TAKE_PASSENGERS,
+            ACTION_VALUE => 1
+          )
+        )
+      ),
+      array(
+        ORDER => 2,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 2
+          ),
+          array(
+            ACTION_TYPE => TAKE_PASSENGERS,
+            ACTION_VALUE => 1
+          )
+        )
+      ),
+      array(
+        ORDER => 3,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_CARDS,
+            ACTION_VALUE => 2
+          ),
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 1
+          )
+        )
+      )
+    )
+  ),
+  9 => array(
+    TICKET_SPACES => array(
+      array(
+        ORDER => 1,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 2
+          ),
+          array(
+            ACTION_TYPE => TAKE_PASSENGERS,
+            ACTION_VALUE => 1
+          )
+        )
+      ),
+      array(
+        ORDER => 2,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 1
+          ),
+          array(
+            ACTION_TYPE => TAKE_PASSENGERS,
+            ACTION_VALUE => 1
+          )
+        )
+      ),
+      array(
+        ORDER => 3,
+        ACTION_TYPES => array(
+          array(
+            ACTION_TYPE => TAKE_VP,
+            ACTION_VALUE => 2
+          )
+        )
+      )
+    )
+  ),
+);
 

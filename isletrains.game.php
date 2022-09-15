@@ -21,6 +21,7 @@ require_once( APP_GAMEMODULE_PATH.'module/table/table.game.php' );
 require_once('modules/constants.inc.php');
 require_once('modules/php/iotIslandManager.class.php');
 require_once('modules/php/iotPlayerManager.class.php');
+require_once('modules/php/iotTicketManager.class.php');
 class IsleTrains extends Table
 {
 	function __construct( )
@@ -44,6 +45,7 @@ class IsleTrains extends Table
 
         $this->islandManager = new IsleOfTrainsIslandManager($this);
         $this->playerManager = new IsleOfTrainsPlayerManager($this);
+        $this->ticketManager = new IsleOfTrainsTicketManager($this);
 	}
 	
     protected function getGameName( )
@@ -63,6 +65,7 @@ class IsleTrains extends Table
     {
         $this->playerManager->setupNewGame($players);
         $this->islandManager->setupNewGame(count($players));
+        $this->ticketManager->setupNewGame();
         
         // Init global values with their initial values
         //self::setGameStateInitialValue( 'my_first_global_variable', 0 );
@@ -98,6 +101,7 @@ class IsleTrains extends Table
             'constants' => get_defined_constants(true)['user'],
             'islands' => $this->islandManager->getUiData(ISLAND),
             'playerInfo' => $this->playerManager->getUiData(),
+            'tickets' => $this->ticketManager->getUiData(),
         ];
 
         return $gamedata;

@@ -22,18 +22,15 @@ define([
     "ebg/core/gamegui",
     "ebg/counter",
     g_gamethemeurl + "modules/js/iotIslandManager.js",
+    g_gamethemeurl + "modules/js/iotTicketManager.js",
     g_gamethemeurl + "modules/js/iotUtilities.js",
 ],
 function (dojo, declare) {
     return declare("bgagame.isletrains", ebg.core.gamegui, {
         constructor: function(){
             this.islandManager = new iot.islandManager(this);
+            this.ticketManager = new iot.ticketManager(this);
             this.utilities = new iot.utilities(this);
-              
-            // Here, you can init the global variables of your user interface
-            // Example:
-            // this.myGlobalValue = 0;
-
         },
         
         /*
@@ -51,10 +48,11 @@ function (dojo, declare) {
         
         setup: function( gamedata )
         {
-            console.log(gamedata);
+            debug('GAMEDATA', gamedata);
             
             this.utilities.defineGlobalConstants(gamedata.constants);
             this.islandManager.setup(gamedata);
+            this.ticketManager.setup(gamedata);
             
             // Setting up player boards
             for( var player_id in gamedata.players )

@@ -45,9 +45,6 @@
 
 /* Note: you must not use any @import directive */
 
-
-/********* You can start writing your CSS below this line: **********/
-
 /* General Classes */
 .iot-hidden {
     display: none !important;
@@ -63,6 +60,13 @@
 
 .iot-island-slot {
     text-align: center;
+}
+
+.iot-island-slot-tiles {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    padding: 5px;
 }
 
 /* Destination Tiles */
@@ -90,7 +94,7 @@ div.iot-destination-tile:hover {
 .iot-destination-tile-flint-beach { background-position: 0 60%; }
 
 /* Island Cards */
-.iot-island-card{
+.iot-island-card {
     display: inline-block;
     position: relative;
     width: 346px;
@@ -106,18 +110,44 @@ div.iot-island-card:hover {
     z-index: 100;
 }
 
-.iot-island-card-1 {background-position: 0 0; }
-.iot-island-card-2 {background-position: 33.33% 0; }
-.iot-island-card-3 {background-position: 0 33.33%; }
-.iot-island-card-4 {background-position: 33.33% 33.33%; }
+.iot-island-card-1 { background-position: 0 0; }
+.iot-island-card-2 { background-position: 33.33% 0; }
+.iot-island-card-3 { background-position: 0 33.33%; }
+.iot-island-card-4 { background-position: 33.33% 33.33%; }
 .iot-island-card-5 { background-position: 66.67% 0; }
-.iot-island-card-6 {background-position: 66.67% 33.33%; }
-.iot-island-card-7 {background-position: 0 66.67%; }
-.iot-island-card-1-back {background-position: 33.33% 66.66%; }
-.iot-island-card-2-back {background-position: 66.66% 66.66%; }
-.iot-island-card-3-back {background-position: 0 100%; }
+.iot-island-card-6 { background-position: 66.67% 33.33%; }
+.iot-island-card-7 { background-position: 0 66.67%; }
+.iot-island-card-1-back { background-position: 33.33% 66.66%; }
+.iot-island-card-2-back { background-position: 66.66% 66.66%; }
+.iot-island-card-3-back { background-position: 0 100%; }
 .iot-island-card-4-back { background-position: 33% 100%; }
-.iot-island-card-5-back {background-position: 66.66% 100%; }
-.iot-island-card-6-back {background-position: 100% 0; }
-.iot-island-card-7-back {background-position: 100% 33.33%; }
+.iot-island-card-5-back { background-position: 66.66% 100%; }
+.iot-island-card-6-back { background-position: 100% 0; }
+.iot-island-card-7-back { background-position: 100% 33.33%; }
 
+/* Ticket Tiles */
+.iot-ticket-tile {
+    display: inline-block;
+    position: relative;
+    width: 313px;
+    height: 117px;
+    border-radius: 5px;
+    border: 1px solid;
+    box-shadow: 1px 1px 1px 0 #000000a0;
+    background-image: url('img/iotTicketTiles.png');
+}
+
+div.iot-ticket-tile:hover {
+    transform: scale(1.05);
+    z-index: 100;
+}
+
+.iot-ticket-tile-1 { background-position: 0 0; }
+.iot-ticket-tile-2 { background-position: 100% 0; }
+.iot-ticket-tile-3 { background-position: 0 25%; }
+.iot-ticket-tile-4 { background-position: 100% 25%; }
+.iot-ticket-tile-5 { background-position: 0 50%; }
+.iot-ticket-tile-6 { background-position: 100% 50%; }
+.iot-ticket-tile-7 { background-position: 0 75%; }
+.iot-ticket-tile-8 { background-position: 100% 75%; }
+.iot-ticket-tile-9 { background-position: 0 100%; }

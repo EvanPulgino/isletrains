@@ -15,6 +15,16 @@
  */
 
 /**
+ * ACTION TYPES
+ */
+define('BUILD', 'build');
+define('LOAD', 'load');
+define('TAKE_CARDS', 'takeCards');
+define('TAKE_CARDS_DISCARD', 'takeCardsDiscard');
+define('TAKE_PASSENGERS', 'takePassengers');
+define('TAKE_VP', 'takeVP');
+
+/**
  * CARGO TYPES
  */
 define('ANY', 1);
@@ -59,15 +69,21 @@ define('FLIPPED', 2);
  * LOCATIONS
  */
 define('ISLAND', 'island');
+define('TICKET', 'ticket');
 
 /**
  * MATERIAL ATTRIBUTES
  */
-define('NAME', 'name');
+define('ACTION_TYPE', 'actionType');
+define('ACTION_TYPES', 'actionTypes');
+define('ACTION_VALUE', 'actionValue');
+define('CARGO', 'cargo');
 define('CONTRACTS', 'contracts');
 define('CONTRACT_TYPE', 'contractType');
+define('NAME', 'name');
+define('ORDER', 'order');
 define('POINTS', 'points');
-define('CARGO', 'cargo');
+define('TICKET_SPACES', 'ticketSpaces');
 
 /**
  * ISLAND TYPES
@@ -84,3 +100,4 @@ define('RESEARCH_STATION', 7);
  * JSTPL TEMPLATES
  */
 define('ISLAND_TEMPLATE', 'jstpl_island');
+define('TICKET_TEMPLATE', 'jstpl_ticket');
