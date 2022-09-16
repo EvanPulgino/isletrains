@@ -91,6 +91,7 @@ html {
 #iot_progress_track_space_4 { left: 360px; position: relative; }
 #iot_progress_track_space_5 { left: 473px; position: relative; }
 #iot_progress_track_space_6 { left: 587px; position: relative; }
+#iot_progress_track_space_7 { right: -80px; bottom: 0; position: absolute; }
 
 /* Destination Tiles */
 .iot-destination-tile {
@@ -147,6 +148,29 @@ div.iot-island-card:hover {
 .iot-island-card-5-back { background-position: 66.66% 100%; }
 .iot-island-card-6-back { background-position: 100% 0; }
 .iot-island-card-7-back { background-position: 100% 33.33%; }
+
+/* Passengers */
+.iot-passenger {
+    display: inline-block;
+    position: relative;
+    width: 53.67px;
+    height: 75px;
+    background-image: url('img/iotPassengers.png');
+}
+
+div.iot-passenger:hover {
+    transform: scale(1.05);
+    z-index: 100;
+}
+
+/* Passenger Bag */
+.iot-passenger-bag {
+    display: inline-block;
+    position: relative;
+    width: 75px;
+    height: 75px;
+    background-image: url('img/iotPassengerBag.png');
+}
 
 /* Progress Track */
 .iot-progress-track {
@@ -216,9 +240,9 @@ div.iot-ticket-tile:hover {
 .iot-ticket-space {
     display: inline-block;
     position: relative;
+    text-align: center;
     width: 88px;
-    height: 55px;
-    top: 30px;
+    height: 80px;
+    top: 13px;
     left: 19px;
-    transform: rotate(54deg);
 }

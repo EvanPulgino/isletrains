@@ -20,6 +20,9 @@
         <div id="iot_progress_track_space_4"></div>
         <div id="iot_progress_track_space_5"></div>
         <div id="iot_progress_track_space_6"></div>
+        <div id="iot_progress_track_space_7">
+            <div id="iot_passenger_bag" class="iot-passenger-bag"></div>
+        </div>
     </div>
     <div id="iot_island">
         <div id="iot_island_slot_empty"></div>
