@@ -57,7 +57,11 @@
 
 var jstpl_island = '<div id="iot_island_${ISLAND_ID}" class="iot-island-card ${ISLAND_CLASS}"></div>';
 var jstpl_train = '<div id="iot_progress_train" class="iot-progress-train"></div>';
-var jstpl_ticket = '<div id="iot_ticket_${TICKET_ID}" class="iot-ticket-tile ${TICKET_CLASS}"></div>';
+var jstpl_ticket = '<div id="iot_ticket_${TICKET_ID}" class="iot-ticket-tile ${TICKET_CLASS}">\
+        <div id="iot_ticket_${TICKET_ID}_space_1" class="iot-ticket-space"></div>\
+        <div id="iot_ticket_${TICKET_ID}_space_2" class="iot-ticket-space"></div>\
+        <div id="iot_ticket_${TICKET_ID}_space_3" class="iot-ticket-space"></div>\
+    </div>';
 
 </script>  
 

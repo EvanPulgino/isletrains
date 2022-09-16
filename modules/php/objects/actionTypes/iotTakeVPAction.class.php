@@ -21,5 +21,6 @@ class IsleOfTrainsTakeVPActionType extends IsleOfTrainsActionType
         parent::__construct($game);
         $this->actionType = TAKE_PASSENGERS;
         $this->actionValue = $value;
+        $this->actionTooltip = clienttranslate('Take ' . $value . ' VP');
     }
 }

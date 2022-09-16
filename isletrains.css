@@ -92,14 +92,13 @@ html {
 #iot_progress_track_space_5 { left: 473px; position: relative; }
 #iot_progress_track_space_6 { left: 587px; position: relative; }
 
-
 /* Destination Tiles */
 .iot-destination-tile {
     display: inline-block;
     position: relative;
     width: 313px;
     height: 66px;
-    border-radius: 10px;
+    border-radius: 15px;
     border: 1px solid;
     box-shadow: 1px 1px 1px 0 #000000a0;
     background-image: url('img/iotDestinationTiles.png');
@@ -212,3 +211,14 @@ div.iot-ticket-tile:hover {
 .iot-ticket-tile-7 { background-position: 0 75%; }
 .iot-ticket-tile-8 { background-position: 100% 75%; }
 .iot-ticket-tile-9 { background-position: 0 100%; }
+
+/* Ticket Spaces */
+.iot-ticket-space {
+    display: inline-block;
+    position: relative;
+    width: 88px;
+    height: 55px;
+    top: 30px;
+    left: 19px;
+    transform: rotate(54deg);
+}

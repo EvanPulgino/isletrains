@@ -32,6 +32,7 @@ define([
                 const ticketSlot = ticket.locationArg + 1;
                 const ticketDiv = 'iot_island_slot_tiles_' + ticketSlot;
                 this.createTicketTile(ticket, ticketDiv);
+                this.createTicketSpaceTooltips(ticket);
             }
         },
 
@@ -40,6 +41,22 @@ define([
                 TICKET_ID: ticket.id,
                 TICKET_CLASS: ticket.cssClass,
             });
+        },
+
+        createTicketSpaceTooltips: function (ticket)
+        {
+            for (let ticketSpacesKey in ticket.ticketSpaces) { 
+                const ticketSpace = ticket.ticketSpaces[ticketSpacesKey];
+
+                let tooltip = ticketSpace.actionTypes[0].actionTooltip;
+
+                if (ticketSpace.actionTypes.length > 1) {
+                    tooltip = tooltip + ' AND ' + ticketSpace.actionTypes[1].actionTooltip;
+                }
+
+                const ticketSpaceDiv = 'iot_ticket_' + ticket.id + '_space_' + ticketSpace.order;
+                this.game.addTooltip(ticketSpaceDiv, _(tooltip), '');
+            }
         }
     });
 });

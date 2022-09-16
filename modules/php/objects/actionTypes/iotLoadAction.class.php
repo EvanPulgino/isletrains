@@ -21,5 +21,6 @@ class IsleOfTrainsLoadActionType extends IsleOfTrainsActionType
         parent::__construct($game);
         $this->actionType = LOAD;
         $this->actionValue = $value;
+        $this->actionTooltip = clienttranslate('Take a bonus Load action');
     }
 }

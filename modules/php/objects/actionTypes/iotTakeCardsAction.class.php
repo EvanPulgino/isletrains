@@ -21,5 +21,12 @@ class IsleOfTrainsTakeCardsActionType extends IsleOfTrainsActionType
         parent::__construct($game);
         $this->actionType = TAKE_CARDS;
         $this->actionValue = $value;
+        $this->actionTooltip = self::buildTooltip($value);
+    }
+
+    private function buildTooltip($actionValue)
+    {
+        $card = $actionValue == 1 ? 'card' : 'cards';
+        return clienttranslate('Take ' . $actionValue . ' ' . $card);
     }
 }

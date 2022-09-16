@@ -21,5 +21,12 @@ class IsleOfTrainsTakeCardsDiscardActionType extends IsleOfTrainsActionType
         parent::__construct($game);
         $this->actionType = TAKE_CARDS_DISCARD;
         $this->actionValue = $value;
+        $this->actionTooltip = self::buildTooltip($value);
+    }
+
+    private function buildTooltip($actionValue)
+    {
+        $card = $actionValue == 1 ? 'card' : 'cards';
+        return clienttranslate('Take ' . $actionValue . ' ' . $card . ' from the discard pile');
     }
 }

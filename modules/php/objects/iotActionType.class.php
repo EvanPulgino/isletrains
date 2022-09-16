@@ -25,15 +25,18 @@ abstract class IsleOfTrainsActionType extends APP_GameClass
 
     protected $actionType = '';
     protected $actionValue = 0;
+    protected $actionTooltip = '';
 
     public function getActionType() { return $this->actionType; }
     public function getActionValue() { return $this->actionValue; }
+    public function getActionTooltip() { return $this->actionTooltip; }
 
     public function getUiData()
     {
         return [
             'actionType' => $this->actionType,
             'actionValue' => $this->actionValue,
+            'actionTooltip' => $this->actionTooltip,
         ];
     }
 }
