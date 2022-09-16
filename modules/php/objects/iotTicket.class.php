@@ -33,7 +33,8 @@ class IsleOfTrainsTicket extends APP_GameClass
         $this->id = $row[ID];
         $this->type = $row[TYPE];
         $this->location = $row[LOCATION];
-        $this->locationArg = (int)$row[LOCATION_ARG];
+        // DB is 0 based and tile order is 1 based
+        $this->locationArg = (int)$row[LOCATION_ARG] + 1;
 
         $ticketSpaces = [];
         foreach($material[TICKET_SPACES] as $ticketSpace) {

@@ -47,7 +47,7 @@ class IsleOfTrainsTicketManager extends APP_GameClass
     {
         $tickets = $this->tickets->getCardsInLocation(TICKET);
         return array_map(function($ticket) {
-            return $this->getTicket($ticket);
+            return self::getTicket($ticket);
         }, $tickets);
     }
 

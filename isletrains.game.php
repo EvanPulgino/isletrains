@@ -20,6 +20,7 @@
 require_once( APP_GAMEMODULE_PATH.'module/table/table.game.php' );
 require_once('modules/constants.inc.php');
 require_once('modules/php/iotIslandManager.class.php');
+require_once('modules/php/iotPassengerManager.class.php');
 require_once('modules/php/iotPlayerManager.class.php');
 require_once('modules/php/iotProgressManager.class.php');
 require_once('modules/php/iotTicketManager.class.php');
@@ -40,6 +41,7 @@ class IsleTrains extends Table
         ));
 
         $this->islandManager = new IsleOfTrainsIslandManager($this);
+        $this->passengerManager = new IsleOfTrainsPassengerManager($this);
         $this->playerManager = new IsleOfTrainsPlayerManager($this);
         $this->progressManager = new IsleOfTrainsProgressManager($this);
         $this->ticketManager = new IsleOfTrainsTicketManager($this);
@@ -63,6 +65,7 @@ class IsleTrains extends Table
         $this->playerManager->setupNewGame($players);
 
         $this->islandManager->setupNewGame(count($players));
+        $this->passengerManager->setupNewGame($this->playerManager->getPlayers());
         $this->progressManager->setupNewGame();
         $this->ticketManager->setupNewGame();
         
@@ -101,6 +104,8 @@ class IsleTrains extends Table
             'currentProgress' => $this->progressManager->getCurrentProgress(),
             'islands' => $this->islandManager->getUiData(ISLAND),
             'playerInfo' => $this->playerManager->getUiData(),
+            'tableauPassengers' => $this->passengerManager->getUiData(TABLEAU),
+            'ticketPassengers' => $this->passengerManager->getUiData(TICKET),
             'tickets' => $this->ticketManager->getUiData(),
         ];
 

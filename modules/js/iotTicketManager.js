@@ -29,8 +29,7 @@ define([
             // Create tickets
             for (let ticketsKey in gamedata.tickets) {
                 const ticket = gamedata.tickets[ticketsKey];
-                const ticketSlot = ticket.locationArg + 1;
-                const ticketDiv = 'iot_island_slot_tiles_' + ticketSlot;
+                const ticketDiv = 'iot_island_slot_tiles_' + ticket.locationArg;
                 this.createTicketTile(ticket, ticketDiv);
                 this.createTicketSpaceTooltips(ticket);
             }

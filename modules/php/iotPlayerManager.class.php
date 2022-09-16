@@ -51,7 +51,7 @@ class IsleOfTrainsPlayerManager extends APP_GameClass
     public function getPlayer($playerId = null)
     {
         $playerId = $playerId ?? $this->game->getActivePlayerId();
-        $players = $this->getPlayers([$playerId]);
+        $players = self::getPlayers([$playerId]);
         return array_shift($players);
     }
 

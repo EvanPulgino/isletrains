@@ -73,7 +73,9 @@ define('FLIPPED', 2);
 /**
  * LOCATIONS
  */
+define('BAG', 'bag');
 define('ISLAND', 'island');
+define('TABLEAU', 'tableau');
 define('TICKET', 'ticket');
 
 /**
