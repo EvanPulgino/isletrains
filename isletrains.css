@@ -51,6 +51,19 @@ html {
     font-size: calc(15px + 0.390625vw);
 }
 
+.roundedbox {
+    background-color: #f5f5f5 !important;
+}
+
+.player-board {
+    background-color: #f5f5f5 !important;
+}
+
+.whiteblock {
+    background-image: unset !important;
+    background-color: rgba(245, 245, 245, .5);
+}
+
 .iot-hidden {
     display: none !important;
 }
@@ -81,6 +94,41 @@ html {
     flex-flow: column nowrap;
     justify-content: space-around;
     padding: 5px;
+}
+
+/* Player Tableau Layout */
+.iot-player-tableau {
+    width: 100%;
+}
+
+.iot-player-header {
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px 0 #000000a0;
+    width: 99%;
+    height: 30px;
+    line-height: 1.25rem;
+    font-size: .75rem;
+    font-weight: 800;
+    margin-top: -15px;
+    margin-left: 15px;
+    padding-left: 20px;
+}
+
+.iot-points-container {
+    display: grid;
+    position: relative;
+    width: 35px;
+    height: 30px;
+    top: 27px;
+    left: 25px;
+    place-content: center;
+}
+
+.iot-points-counter {
+    font-size: 1rem;
+    font-weight: 800;
+    text-shadow: .05rem 0 .05rem whitesmoke, 0 -.05rem .05rem whitesmoke, 0 .05rem .05rem whitesmoke, -.05rem 0 .05rem whitesmoke;
 }
 
 /* Progress Track Layout */
@@ -170,6 +218,20 @@ div.iot-passenger:hover {
     width: 75px;
     height: 75px;
     background-image: url('img/iotPassengerBag.png');
+}
+
+/* Point Symbol */
+.iot-point-symbol {
+    display: inline-block;
+    position: relative;
+    width: 88px;
+    height: 81px;
+    background-image: url('img/iotPointSymbol.png');
+}
+
+div.iot-point-symbol:hover {
+    transform: scale(1.05);
+    z-index: 100;
 }
 
 /* Progress Track */

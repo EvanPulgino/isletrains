@@ -98,11 +98,13 @@ class IsleTrains extends Table
     protected function getAllDatas()
     {    
         $current_player_id = self::getCurrentPlayerId();    // !! We must only return informations visible by this player !!
+        $sql = "SELECT player_id id, player_score score FROM player ";
 
         $gamedata = [
             'constants' => get_defined_constants(true)['user'],
             'currentProgress' => $this->progressManager->getCurrentProgress(),
             'islands' => $this->islandManager->getUiData(ISLAND),
+            'players' => self::getCollectionFromDb($sql),
             'playerInfo' => $this->playerManager->getUiData(),
             'tableauPassengers' => $this->passengerManager->getUiData(TABLEAU),
             'ticketPassengers' => $this->passengerManager->getUiData(TICKET),
@@ -134,11 +136,14 @@ class IsleTrains extends Table
 //////////// Utility functions
 ////////////    
 
-    /*
-        In this space, you can put any utility methods useful for your game logic
-    */
-
-
+    /**
+     * Wrapper for getCurrentPlayerId
+     * @return int ID of player who loaded screen
+     */
+    function getViewingPlayerId()
+    {
+        return self::getCurrentPlayerId();
+    }
 
 //////////////////////////////////////////////////////////////////////////////
 //////////// Player actions

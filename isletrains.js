@@ -22,6 +22,7 @@ define([
     "ebg/core/gamegui",
     "ebg/counter",
     g_gamethemeurl + "modules/js/iotIslandManager.js",
+    g_gamethemeurl + "modules/js/iotPlayerManager.js",
     g_gamethemeurl + "modules/js/iotProgressManager.js",
     g_gamethemeurl + "modules/js/iotTicketManager.js",
     g_gamethemeurl + "modules/js/iotUtilities.js",
@@ -30,6 +31,7 @@ function (dojo, declare) {
     return declare("bgagame.isletrains", ebg.core.gamegui, {
         constructor: function(){
             this.islandManager = new iot.islandManager(this);
+            this.playerManager = new iot.playerManager(this);
             this.progressManager = new iot.progressManager(this);
             this.ticketManager = new iot.ticketManager(this);
             this.utilities = new iot.utilities(this);
@@ -54,6 +56,7 @@ function (dojo, declare) {
             
             this.utilities.defineGlobalConstants(gamedata.constants);
             this.islandManager.setup(gamedata);
+            this.playerManager.setup(gamedata);
             this.progressManager.setup(gamedata);
             this.ticketManager.setup(gamedata);
             
@@ -70,8 +73,6 @@ function (dojo, declare) {
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
-
-            console.log( "Ending game setup" );
         },
        
 
@@ -82,9 +83,7 @@ function (dojo, declare) {
         //                  You can use this method to perform some user interface changes at this moment.
         //
         onEnteringState: function( stateName, args )
-        {
-            console.log( 'Entering state: '+stateName );
-            
+        {            
             switch( stateName )
             {
             
@@ -108,9 +107,7 @@ function (dojo, declare) {
         //                 You can use this method to perform some user interface changes at this moment.
         //
         onLeavingState: function( stateName )
-        {
-            console.log( 'Leaving state: '+stateName );
-            
+        {            
             switch( stateName )
             {
             
@@ -134,9 +131,7 @@ function (dojo, declare) {
         //                        action status bar (ie: the HTML links in the status bar).
         //        
         onUpdateActionButtons: function( stateName, args )
-        {
-            console.log( 'onUpdateActionButtons: '+stateName );
-                      
+        {                      
             if( this.isCurrentPlayerActive() )
             {            
                 switch( stateName )
@@ -230,9 +225,7 @@ function (dojo, declare) {
         
         */
         setupNotifications: function()
-        {
-            console.log( 'notifications subscriptions setup' );
-            
+        {            
             // TODO: here, associate your game notifications with local methods
             
             // Example 1: standard notification handling

@@ -54,6 +54,18 @@
             <div id="iot_destination_tile_1" class="iot-destination-tile iot-destination-tile-flint-beach"></div>
         </div>
     </div>
+    <!-- BEGIN playertableau -->
+    <div id="iot_player_tableau_{PLAYER_ID}" class="iot-player-tableau whiteblock">
+        <h3 id="iot_player_header_{PLAYER_ID}" class="iot-player-header" style="color: #{PLAYER_COLOR}; background-image: linear-gradient(to right, whitesmoke, #{PLAYER_COLOR})">
+            {PLAYER_NAME}
+        </h3>
+        <div id="iot_point_symbol_{PLAYER_ID}" class="iot-point-symbol">
+            <div id="iot_points_container_{PLAYER_ID}" class="iot-points-container">
+                <span id="iot_points_counter_{PLAYER_ID}" class="iot-points-counter"></span>
+            </div>
+        </div>
+    </div>
+    <!-- END playertableau -->
 </div>
 
 <script type="text/javascript">
