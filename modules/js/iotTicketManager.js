@@ -37,7 +37,7 @@ define([
 
         createTicketTile: function (ticket, parentDiv) {
             this.game.utilities.placeBlock(TICKET_TEMPLATE, parentDiv, {
-                TICKET_ID: ticket.id,
+                TICKET_TYPE: ticket.locationArg,
                 TICKET_CLASS: ticket.cssClass,
             });
         },
@@ -53,7 +53,7 @@ define([
                     tooltip = tooltip + ' AND ' + ticketSpace.actionTypes[1].actionTooltip;
                 }
 
-                const ticketSpaceDiv = 'iot_ticket_' + ticket.id + '_space_' + ticketSpace.order;
+                const ticketSpaceDiv = 'iot_ticket_' + ticket.locationArg + '_space_' + ticketSpace.order;
                 this.game.addTooltip(ticketSpaceDiv, _(tooltip), '');
             }
         }

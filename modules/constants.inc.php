@@ -107,5 +107,6 @@ define('RESEARCH_STATION', 7);
  * JSTPL TEMPLATES
  */
 define('ISLAND_TEMPLATE', 'jstpl_island');
+define('PASSENGER_TEMPLATE', 'jstpl_passenger');
 define('TICKET_TEMPLATE', 'jstpl_ticket');
 define('TRAIN_TEMPLATE', 'jstpl_train');

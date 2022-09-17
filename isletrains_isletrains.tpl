@@ -59,10 +59,13 @@
         <h3 id="iot_player_header_{PLAYER_ID}" class="iot-player-header" style="color: #{PLAYER_COLOR}; background-image: linear-gradient(to right, whitesmoke, #{PLAYER_COLOR})">
             {PLAYER_NAME}
         </h3>
-        <div id="iot_point_symbol_{PLAYER_ID}" class="iot-point-symbol">
-            <div id="iot_points_container_{PLAYER_ID}" class="iot-points-container">
-                <span id="iot_points_counter_{PLAYER_ID}" class="iot-points-counter"></span>
+        <div id="iot_player_info_column_{PLAYER_ID}" class="iot-player-info-column">
+            <div id="iot_point_symbol_{PLAYER_ID}" class="iot-point-symbol">
+                <div id="iot_points_container_{PLAYER_ID}" class="iot-points-container">
+                    <span id="iot_points_counter_{PLAYER_ID}" class="iot-points-counter"></span>
+                </div>
             </div>
+            <div id="iot_player_passenger_area_{PLAYER_ID}" class="iot-player-passenger-area"></div>
         </div>
     </div>
     <!-- END playertableau -->
@@ -71,11 +74,12 @@
 <script type="text/javascript">
 
 var jstpl_island = '<div id="iot_island_${ISLAND_ID}" class="iot-island-card ${ISLAND_CLASS}"></div>';
+var jstpl_passenger = '<div id="iot_passenger_${PASSENGER_ID}" class="iot-passenger ${PASSENGER_CLASS}"></div>';
 var jstpl_train = '<div id="iot_progress_train" class="iot-progress-train"></div>';
-var jstpl_ticket = '<div id="iot_ticket_${TICKET_ID}" class="iot-ticket-tile ${TICKET_CLASS}">\
-        <div id="iot_ticket_${TICKET_ID}_space_1" class="iot-ticket-space"></div>\
-        <div id="iot_ticket_${TICKET_ID}_space_2" class="iot-ticket-space"></div>\
-        <div id="iot_ticket_${TICKET_ID}_space_3" class="iot-ticket-space"></div>\
+var jstpl_ticket = '<div id="iot_ticket_${TICKET_TYPE}" class="iot-ticket-tile ${TICKET_CLASS}">\
+        <div id="iot_ticket_${TICKET_TYPE}_space_1" class="iot-ticket-space"></div>\
+        <div id="iot_ticket_${TICKET_TYPE}_space_2" class="iot-ticket-space"></div>\
+        <div id="iot_ticket_${TICKET_TYPE}_space_3" class="iot-ticket-space"></div>\
     </div>';
 
 </script>  

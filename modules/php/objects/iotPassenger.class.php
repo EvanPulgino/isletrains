@@ -21,6 +21,7 @@ class IsleOfTrainsPassenger extends APP_GameClass
     private $type;
     private $location;
     private $locationArg;
+    private $cssClass;
 
     public function __construct($game, $row)
     {
@@ -29,12 +30,14 @@ class IsleOfTrainsPassenger extends APP_GameClass
         $this->type = $row[TYPE];
         $this->location = $row[LOCATION];
         $this->locationArg = $row[LOCATION_ARG];
+        $this->cssClass = 'iot-passenger-' . $this->type;
     }
 
     public function getId(){ return $this->id; }
     public function getType(){ return $this->type; }
     public function getLocation(){ return $this->location; }
     public function getLocationArg(){ return $this->locationArg; }
+    public function getCssClass(){ return $this->cssClass; }
 
     public function getUiData()
     {
@@ -43,6 +46,7 @@ class IsleOfTrainsPassenger extends APP_GameClass
             'type' => $this->type,
             'location' => $this->location,
             'locationArg' => $this->locationArg,
+            'cssClass' => $this->cssClass,
         ];
     }
 
