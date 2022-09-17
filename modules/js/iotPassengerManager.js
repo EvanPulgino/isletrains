@@ -19,13 +19,21 @@ define([
     'dojo',
     'dojo/_base/declare',
     'ebg/core/gamegui',
+    'ebg/counter',
 ], (dojo, declare, on) => {
     return declare('iot.passengerManager', ebg.core.gamegui, {
         constructor: function (game) {
             this.game = game;
+
+            this.remainingPassengerCount = new ebg.counter();
         },
  
         setup: function (gamedata) {
+            this.addTooltip('iot_passenger_bag', _('Passenger Bag'), '');
+
+            this.remainingPassengerCount.create('iot_passenger_count');
+            this.remainingPassengerCount.setValue(gamedata.remainingPassengers);
+
             // Create passengers controlled by players
             for (let tableauPassengersKey in gamedata.tableauPassengers) {
                 const passenger = gamedata.tableauPassengers[tableauPassengersKey];

@@ -19,7 +19,7 @@ define([
     'dojo',
     'dojo/_base/declare',
     'ebg/core/gamegui',
-    'ebg/counter'
+    'ebg/counter',
 ], (dojo, declare, on) => {
     return declare('iot.playerManager', ebg.core.gamegui, {
         constructor: function (game) {

@@ -154,6 +154,12 @@ html {
 #iot_progress_track_space_6 { left: 587px; position: relative; }
 #iot_progress_track_space_7 { right: -80px; bottom: 0; position: absolute; }
 
+#iot_passenger_count {
+    font-size: 1rem;
+    color: whitesmoke;
+    text-shadow: .05rem 0 .05rem lightslategray, 0 -.05rem .05rem lightslategray, 0 .05rem .05rem lightslategray, -.05rem 0 .05rem lightslategray;
+}
+
 /* Destination Tiles */
 .iot-destination-tile {
     display: inline-block;
@@ -233,11 +239,12 @@ div.iot-passenger:hover {
 
 /* Passenger Bag */
 .iot-passenger-bag {
-    display: inline-block;
+    display: grid;
     position: relative;
     width: 75px;
     height: 75px;
     background-image: url('img/iotPassengerBag.png');
+    place-content: center;
 }
 
 /* Point Symbol */

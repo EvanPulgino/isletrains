@@ -106,6 +106,7 @@ class IsleTrains extends Table
             'islands' => $this->islandManager->getUiData(ISLAND),
             'players' => self::getCollectionFromDb($sql),
             'playerInfo' => $this->playerManager->getUiData(),
+            'remainingPassengers' => count($this->passengerManager->getPassengers(BAG)),
             'tableauPassengers' => $this->passengerManager->getUiData(TABLEAU),
             'ticketPassengers' => $this->passengerManager->getUiData(TICKET),
             'tickets' => $this->ticketManager->getUiData(),
