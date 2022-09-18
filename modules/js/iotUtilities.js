@@ -70,7 +70,7 @@ define([
             if (!args) {
                 args = [];
             }
-              
+
             dojo.place(this.format_block(template, args), parentDiv);
         },
   

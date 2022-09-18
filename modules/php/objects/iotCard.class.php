@@ -53,7 +53,7 @@ class IsleOfTrainsCard extends APP_GameClass
         $material = $this->game->card[$row[TYPE]];
 
         $this->id = $row[ID];
-        $this->type = $row[TYPE];
+        $this->type = $material[TYPE];
         $this->typeArg = $row[TYPE_ARG];
         $this->location = $row[LOCATION];
         $this->locationArg = $row[LOCATION_ARG];
@@ -67,7 +67,7 @@ class IsleOfTrainsCard extends APP_GameClass
         $this->weight = $material[WEIGHT];
         $this->cargo = $material[CARGO];
         $this->actionTypes = self::buildActionTypesArray($material[ACTION_TYPES]);
-        $this->cssClass = 'iot-train-card-' . $this->type . '-' . $this->typeArg;
+        $this->cssClass = 'iot-card-' . $this->type . '-' . $this->typeArg;
     }
 
     public function getId() { return $this->id; }

@@ -21,6 +21,7 @@ define([
     "dojo","dojo/_base/declare",
     "ebg/core/gamegui",
     "ebg/counter",
+    g_gamethemeurl + "modules/js/iotCardManager.js",
     g_gamethemeurl + "modules/js/iotIslandManager.js",
     g_gamethemeurl + "modules/js/iotPassengerManager.js",
     g_gamethemeurl + "modules/js/iotPlayerManager.js",
@@ -30,7 +31,8 @@ define([
 ],
 function (dojo, declare) {
     return declare("bgagame.isletrains", ebg.core.gamegui, {
-        constructor: function(){
+        constructor: function () {
+            this.cardManager = new iot.cardManager(this);
             this.islandManager = new iot.islandManager(this);
             this.passengerManager = new iot.passengerManager(this);
             this.playerManager = new iot.playerManager(this);
@@ -65,6 +67,7 @@ function (dojo, declare) {
             this.passengerManager.setup(gamedata);
             this.playerManager.setup(gamedata);
             this.progressManager.setup(gamedata);
+            this.cardManager.setup(gamedata);
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();

@@ -12,6 +12,11 @@
 -->
 
 <div id="iot_layout">
+    <div id="iot_cards_panel">
+        <div id="iot_deck"></div>
+        <div id="iot_card_display" class="whiteblock"></div>
+        <div id="iot_discard"></div>
+    </div>
     <div id="iot_progress_track" class="iot-progress-track">
         <div id="iot_progress_track_space_0"></div>
         <div id="iot_progress_track_space_1"></div>
@@ -56,6 +61,11 @@
             <div id="iot_destination_tile_1" class="iot-destination-tile iot-destination-tile-flint-beach"></div>
         </div>
     </div>
+    <div id="iot_current_player_hand" class="whiteblock">
+        <h3 id="iot_player_hand_header" class="iot-player-header" style="color: black; background-image: linear-gradient(to right, whitesmoke, black)">
+            Your Hand
+        </h3>
+    </div>
     <!-- BEGIN playertableau -->
     <div id="iot_player_tableau_{PLAYER_ID}" class="iot-player-tableau whiteblock">
         <h3 id="iot_player_header_{PLAYER_ID}" class="iot-player-header" style="color: #{PLAYER_COLOR}; background-image: linear-gradient(to right, whitesmoke, #{PLAYER_COLOR})">
@@ -69,12 +79,14 @@
             </div>
             <div id="iot_player_passenger_area_{PLAYER_ID}" class="iot-player-passenger-area"></div>
         </div>
+        <div id="iot_player_train_{PLAYER_ID}" class="iot-player-train"></div>
     </div>
     <!-- END playertableau -->
 </div>
 
 <script type="text/javascript">
 
+var jstpl_card = '<div id="iot_card_${CARD_ID}" class="iot-card ${CARD_CLASS}" style="order:${CARD_TYPE};"></div>';
 var jstpl_island = '<div id="iot_island_${ISLAND_ID}" class="iot-island-card ${ISLAND_CLASS}"></div>';
 var jstpl_passenger = '<div id="iot_passenger_${PASSENGER_ID}" class="iot-passenger ${PASSENGER_CLASS}"></div>';
 var jstpl_train = '<div id="iot_progress_train" class="iot-progress-train"></div>';
