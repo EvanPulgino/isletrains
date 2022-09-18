@@ -31,14 +31,21 @@ define([
             for (let cardsInDeckKey in gamedata.cardsInDeck) {
                 const card = gamedata.cardsInDeck[cardsInDeckKey];
                 const cardDiv = 'iot_deck';
-                this.createCard(card, cardDiv, false);
+                this.createCard(card, cardDiv, card.locationArg * -1, false);
             }
 
             // Create card display
             for (let cardsInDisplayKey in gamedata.cardsInDisplay) {
                 const card = gamedata.cardsInDisplay[cardsInDisplayKey];
                 const cardDiv = 'iot_card_display';
-                this.createCard(card, cardDiv);
+                this.createCard(card, cardDiv, 0);
+            }
+
+            // Create discard
+            for (let cardsInDiscardKey in gamedata.cardsInDiscard) {
+                const card = gamedata.cardsInDiscard[cardsInDiscardKey];
+                const cardDiv = 'iot_discard';
+                this.createCard(card, cardDiv, card.locationArg * -1, false);
             }
 
             // Create hands
@@ -46,7 +53,7 @@ define([
                 const card = gamedata.cardsInHand[cardsInHandKey];
                 if (card.locationArg == this.game.getCurrentPlayerId()) {
                     const cardDiv = 'iot_current_player_hand';
-                    this.createCard(card, cardDiv);
+                    this.createCard(card, cardDiv, card.type);
 
                 }
             }
@@ -55,15 +62,15 @@ define([
             for (let cardsInTrainKey in gamedata.cardsInTrain) {
                 const card = gamedata.cardsInTrain[cardsInTrainKey];
                 const cardDiv = 'iot_player_train_' + card.locationArg;
-                this.createCard(card, cardDiv);
+                this.createCard(card, cardDiv, card.type);
             }
         },
 
-        createCard: function (card, parentDiv, faceup = true) {
+        createCard: function (card, parentDiv, order, faceup = true) {
             this.game.utilities.placeBlock(CARD_TEMPLATE, parentDiv, {
                 CARD_ID: card.id,
                 CARD_CLASS: faceup ? card.cssClass : 'iot-card-back',
-                CARD_TYPE: card.type,
+                CARD_ORDER: order,
             });
         }
     });
