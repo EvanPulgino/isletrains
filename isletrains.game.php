@@ -19,6 +19,7 @@
 
 require_once( APP_GAMEMODULE_PATH.'module/table/table.game.php' );
 require_once('modules/constants.inc.php');
+require_once('modules/php/iotCardManager.class.php');
 require_once('modules/php/iotIslandManager.class.php');
 require_once('modules/php/iotPassengerManager.class.php');
 require_once('modules/php/iotPlayerManager.class.php');
@@ -40,6 +41,7 @@ class IsleTrains extends Table
             CURRENT_PROGRESS => 10,
         ));
 
+        $this->cardManager = new IsleOfTrainsCardManager($this);
         $this->islandManager = new IsleOfTrainsIslandManager($this);
         $this->passengerManager = new IsleOfTrainsPassengerManager($this);
         $this->playerManager = new IsleOfTrainsPlayerManager($this);
@@ -63,9 +65,11 @@ class IsleTrains extends Table
     protected function setupNewGame( $players, $options = array() )
     {
         $this->playerManager->setupNewGame($players);
+        $updatedPlayers = $this->playerManager->getPlayers();
 
-        $this->islandManager->setupNewGame(count($players));
-        $this->passengerManager->setupNewGame($this->playerManager->getPlayers());
+        $this->cardManager->setupNewGame($updatedPlayers);
+        $this->islandManager->setupNewGame(count($updatedPlayers));
+        $this->passengerManager->setupNewGame($updatedPlayers);
         $this->progressManager->setupNewGame();
         $this->ticketManager->setupNewGame();
         
@@ -102,6 +106,12 @@ class IsleTrains extends Table
 
         $gamedata = [
             'constants' => get_defined_constants(true)['user'],
+            'cardsInBuildingSlot' => $this->cardManager->getUiData(BUILDING_SLOT),
+            'cardsInDeck' => $this->cardManager->getUiData(DECK),
+            'cardsInDiscard' => $this->cardManager->getUiData(DISCARD),
+            'cardsInDisplay' => $this->cardManager->getUiData(DISPLAY),
+            'cardsInHand' => $this->cardManager->getUiData(HAND),
+            'cardsInTrain' => $this->cardManager->getUiData(TRAIN),
             'currentProgress' => $this->progressManager->getCurrentProgress(),
             'islands' => $this->islandManager->getUiData(ISLAND),
             'players' => self::getCollectionFromDb($sql),

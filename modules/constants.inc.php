@@ -17,7 +17,13 @@
 /**
  * ACTION TYPES
  */
+define('ACTION', 'action');
 define('BUILD', 'build');
+define('DELIVER', 'deliver');
+define('DELIVER_OR_LOAD', 'deliverOrLoad');
+define('DISCARD_CARDS', 'discardCards');
+define('GAIN_ABILITY', 'gainAbility');
+define('GAIN_END_GAME_SCORING', 'gainEndGameScoring');
 define('LOAD', 'load');
 define('TAKE_CARDS', 'takeCards');
 define('TAKE_CARDS_DISCARD', 'takeCardsDiscard');
@@ -25,12 +31,25 @@ define('TAKE_PASSENGERS', 'takePassengers');
 define('TAKE_VP', 'takeVP');
 
 /**
+ * CARD TYPES
+ */
+define('ENGINE', 1);
+define('BOXCAR', 2);
+define('COACH', 3);
+define('HOPPER', 4);
+define('TANKER', 5);
+define('CABOOSE', 6);
+define('BUILDING', 7);
+
+/**
  * CARGO TYPES
  */
 define('ANY', 1);
 define('BOX', 2);
 define('COAL', 3);
-define('OIL', 4);
+define('PASSENGER', 4);
+define('OIL', 5);
+define('NOTHING', 6);
 
 /**
  * CONTRACT TYPES
@@ -74,9 +93,16 @@ define('FLIPPED', 2);
  * LOCATIONS
  */
 define('BAG', 'bag');
+define('BUILDING_SLOT', 'buildingSlot');
+define('DECK', 'deck');
+define('DISCARD', 'discard');
+define('DISPLAY', 'display');
+define('HAND', 'hand');
 define('ISLAND', 'island');
+define('LEVEL_ONE_ENGINES', 'l1engines');
 define('TABLEAU', 'tableau');
 define('TICKET', 'ticket');
+define('TRAIN', 'train');
 
 /**
  * MATERIAL ATTRIBUTES
@@ -84,13 +110,18 @@ define('TICKET', 'ticket');
 define('ACTION_TYPE', 'actionType');
 define('ACTION_TYPES', 'actionTypes');
 define('ACTION_VALUE', 'actionValue');
+define('CAPACITY', 'capacity');
 define('CARGO', 'cargo');
 define('CONTRACTS', 'contracts');
 define('CONTRACT_TYPE', 'contractType');
+define('COST', 'cost');
+define('HOLDS', 'holds');
 define('NAME', 'name');
 define('ORDER', 'order');
+define('PASSENGERS', 'passengers');
 define('POINTS', 'points');
 define('TICKET_SPACES', 'ticketSpaces');
+define('WEIGHT', 'weight');
 
 /**
  * ISLAND TYPES
