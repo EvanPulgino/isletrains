@@ -86,7 +86,7 @@
 
 <script type="text/javascript">
 
-var jstpl_card = '<div id="iot_card_${CARD_ID}" class="iot-card ${CARD_CLASS}" style="order:${CARD_TYPE};"></div>';
+var jstpl_card = '<div id="iot_card_${CARD_ID}" class="iot-card ${CARD_CLASS}" style="order:${CARD_ORDER};"></div>';
 var jstpl_island = '<div id="iot_island_${ISLAND_ID}" class="iot-island-card ${ISLAND_CLASS}"></div>';
 var jstpl_passenger = '<div id="iot_passenger_${PASSENGER_ID}" class="iot-passenger ${PASSENGER_CLASS}"></div>';
 var jstpl_train = '<div id="iot_progress_train" class="iot-progress-train"></div>';
