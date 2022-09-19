@@ -63,7 +63,7 @@ class IsleOfTrainsPlayerManager extends APP_GameClass
      */
     public function getPlayers($playerIds = null)
     {
-        $sql = "SELECT player_id id, player_no naturalOrder, player_name name, player_avatar avatar, player_color color, player_score score, player_eliminated eliminated, player_zombie zombie FROM player";
+        $sql = "SELECT player_id id, player_no naturalOrder, player_name name, player_avatar avatar, player_color color, player_score score, player_weight weight, player_eliminated eliminated, player_zombie zombie FROM player";
         
         if(is_array($playerIds)) {
             $sql .= " WHERE player_id IN ('" . implode("','", $playerIds) . "')";

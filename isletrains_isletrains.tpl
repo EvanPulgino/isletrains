@@ -13,7 +13,10 @@
 
 <div id="iot_layout">
     <div id="iot_cards_panel">
-        <div id="iot_deck"></div>
+        <div id="iot_deck_container">
+            <span id="iot_deck_counter"></span>
+            <div id="iot_deck"></div>
+        </div>
         <div id="iot_card_display" class="whiteblock"></div>
         <div id="iot_discard"></div>
     </div>
@@ -75,6 +78,18 @@
             <div id="iot_point_symbol_{PLAYER_ID}" class="iot-point-symbol">
                 <div id="iot_points_container_{PLAYER_ID}" class="iot-points-container">
                     <span id="iot_points_counter_{PLAYER_ID}" class="iot-points-counter"></span>
+                </div>
+            </div>
+            <div id="iot_player_tracker_area_{PLAYER_ID}" class="iot-player-tracker-area">
+                <div id="iot_player_card_symbol_{PLAYER_ID}" class="iot-mini-card">
+                    <div id="iot_hand_card_count_container_{PLAYER_ID}" class="iot-hand-card-count-container">
+                        <span id="iot_hand_card_counter_{PLAYER_ID}" class="iot-hand-card-counter"></span>
+                    </div>
+                </div>
+                <div id="iot_player_weight_symbol_{PLAYER_ID}" class="iot-weight">
+                    <div id="iot_weight_count_container_{PLAYER_ID}" class="iot-weight-count-container">
+                        <span id="iot_weight_counter_{PLAYER_ID}" class="iot-weight-counter">0</span>
+                    </div>
                 </div>
             </div>
             <div id="iot_player_passenger_area_{PLAYER_ID}" class="iot-player-passenger-area"></div>

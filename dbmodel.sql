@@ -45,6 +45,5 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   PRIMARY KEY (`card_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- Example 2: add a custom field to the standard "player" table
--- ALTER TABLE `player` ADD `player_my_custom_field` INT UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `player` ADD `player_weight` INT UNSIGNED NOT NULL DEFAULT '4';
 

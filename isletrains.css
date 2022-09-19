@@ -86,6 +86,14 @@ html {
     gap: 20px;
 }
 
+#iot_deck_container {
+    display: grid;
+    position: relative;
+    width: 350px;
+    height: 247px;
+    place-content: center;
+}
+
 #iot_deck {
     --gap: -350px;
     position: relative;
@@ -99,6 +107,15 @@ html {
     transform: unset !important;
     z-index: unset !important;
     order: unset !important
+}
+
+#iot_deck_counter {
+    position: absolute;
+    top: 50px;
+    font-size: 5rem;
+    font-weight: 800;
+    text-shadow: .05rem 0 .05rem whitesmoke, 0 -.05rem .05rem whitesmoke, 0 .05rem .05rem whitesmoke, -.05rem 0 .05rem whitesmoke;
+    z-index: 100;
 }
 
 #iot_card_display {
@@ -197,6 +214,42 @@ html {
 
 .iot-points-counter {
     font-size: 1rem;
+    font-weight: 800;
+    text-shadow: .05rem 0 .05rem whitesmoke, 0 -.05rem .05rem whitesmoke, 0 .05rem .05rem whitesmoke, -.05rem 0 .05rem whitesmoke;
+}
+
+.iot-player-tracker-area {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.iot-hand-card-count-container {
+    display: grid;
+    position: relative;
+    width: 71px;
+    height: 100px;
+    place-content: center;
+}
+
+.iot-hand-card-counter {
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: .05rem 0 .05rem whitesmoke, 0 -.05rem .05rem whitesmoke, 0 .05rem .05rem whitesmoke, -.05rem 0 .05rem whitesmoke;
+}
+
+.iot-weight-count-container {
+    display: grid;
+    position: relative;
+    width: 104px;
+    height: 70px;
+    place-content: center;
+}
+
+.iot-weight-counter {
+    font-size: 1.5rem;
     font-weight: 800;
     text-shadow: .05rem 0 .05rem whitesmoke, 0 -.05rem .05rem whitesmoke, 0 .05rem .05rem whitesmoke, -.05rem 0 .05rem whitesmoke;
 }
@@ -342,6 +395,18 @@ div.iot-island-card:hover {
 .iot-island-card-6-back { background-position: 100% 0; }
 .iot-island-card-7-back { background-position: 100% 33.33%; }
 
+/* Mini Card */
+.iot-mini-card {
+    display: inline-block;
+    position: relative;
+    width: 71px;
+    height: 100px;
+    border-radius: 5px;
+    border: 1px solid;
+    box-shadow: 1px 1px 1px 0 #000000a0;
+    background-image: url('img/iotMiniCard.png');
+}
+
 /* Passengers */
 .iot-passenger {
     display: inline-block;
@@ -455,4 +520,13 @@ div.iot-ticket-tile:hover {
     height: 80px;
     top: 13px;
     left: 19px;
+}
+
+/* Weight */
+.iot-weight {
+    display: inline-block;
+    position: relative;
+    width: 104px;
+    height: 70px;
+    background-image: url('img/iotWeight.png');
 }

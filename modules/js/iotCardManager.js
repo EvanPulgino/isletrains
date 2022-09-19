@@ -19,10 +19,13 @@ define([
     'dojo',
     'dojo/_base/declare',
     'ebg/core/gamegui',
+    'ebg/counter',
 ], (dojo, declare, on) => {
     return declare('iot.cardManager', ebg.core.gamegui, {
         constructor: function (game) {
             this.game = game;
+
+            this.deckCounter = new ebg.counter();
         },
 
         setup: function (gamedata) {
@@ -33,6 +36,7 @@ define([
                 const cardDiv = 'iot_deck';
                 this.createCard(card, cardDiv, card.locationArg * -1, false);
             }
+            this.createDeckCounter(gamedata.cardsInDeck.length);
 
             // Create card display
             for (let cardsInDisplayKey in gamedata.cardsInDisplay) {
@@ -51,6 +55,7 @@ define([
             // Create hands
             for (let cardsInHandKey in gamedata.cardsInHand) {
                 const card = gamedata.cardsInHand[cardsInHandKey];
+                this.game.playerManager.incrementPlayerHandCounterNoAnimation(card.locationArg, 1);
                 if (card.locationArg == this.game.getCurrentPlayerId()) {
                     const cardDiv = 'iot_current_player_hand';
                     this.createCard(card, cardDiv, card.type);
@@ -72,6 +77,11 @@ define([
                 CARD_CLASS: faceup ? card.cssClass : 'iot-card-back',
                 CARD_ORDER: order,
             });
+        },
+
+        createDeckCounter: function (deckCount) {
+            this.deckCounter.create('iot_deck_counter');
+            this.deckCounter.setValue(deckCount);
         }
     });
 });

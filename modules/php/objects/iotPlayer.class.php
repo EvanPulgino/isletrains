@@ -23,6 +23,7 @@ class IsleOfTrainsPlayer extends APP_GameClass
     private $avatar;
     private $color;
     private $score;
+    private $weight;
     private $eliminated = false;
     private $zombie = false;
 
@@ -35,6 +36,7 @@ class IsleOfTrainsPlayer extends APP_GameClass
         $this->avatar = $row[AVATAR];
         $this->color = $row[COLOR];
         $this->score = $row[SCORE];
+        $this->weight = $row[WEIGHT];
         $this->eliminated = $row[ELIMINATED] == 1;
         $this->zombie = $row[ZOMBIE] == 1;
     }
@@ -45,6 +47,7 @@ class IsleOfTrainsPlayer extends APP_GameClass
     public function getAvatar(){ return $this->avatar; }
     public function getColor(){ return $this->color; }
     public function getScore(){ return $this->score; }
+    public function getWeight(){ return $this->weight; }
     public function isEliminated(){ return $this->eliminated; }
     public function isZombie(){ return $this->zombie; }
 
@@ -60,6 +63,7 @@ class IsleOfTrainsPlayer extends APP_GameClass
             'name' => $this->name,
             'color' => $this->color,
             'score' => $this->score,
+            'weight' => $this->weight,
         ];
     }
 }
