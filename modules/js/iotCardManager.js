@@ -108,12 +108,16 @@ define([
 
         getTooltipAbility: function (card)
         { 
-            let tooltip = card.actionTypes[0].actionTooltip;
-
-            if (card.actionTypes.length > 1) {
-                tooltip = tooltip + ' AND ' + card.actionTypes[1].actionTooltip;
+            let tooltip = '';
+            for (let actionTypesKey in card.actionTypes) {
+                const actionType = card.actionTypes[actionTypesKey];
+                if (tooltip.length == 0) {
+                    tooltip = actionType.actionTooltip;
+                } else {
+                    tooltip = tooltip + ' AND ' + actionType.actionTooltip;
+                }
             }
-
+            
             return tooltip;
         },
 
