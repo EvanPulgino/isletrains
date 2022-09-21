@@ -525,10 +525,11 @@ div.iot-passenger:hover {
     background-image: url('img/iotResources.png');
 }
 
-.iot-box { background-position: 66.67% 0; }
+.iot-any { background-position: 100% 0; }
+.iot-box { background-position: 50% 0; }
 .iot-coal { background-position: 0 0; }
-.iot-oil { background-position: 33.33% 0; }
-.iot-passenger { background-position: 100% 0; }
+.iot-oil { background-position: 25% 0; }
+.iot-passenger-cargo { background-position: 75% 0; }
 
 
 /* Ticket Tiles */
@@ -596,6 +597,8 @@ div.iot-passenger:hover {
     font-size: 15px;
     padding: 4px;
     border-left: 1px solid;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .iot-card-tooltip-title {
@@ -603,4 +606,9 @@ div.iot-passenger:hover {
     position: relative;
     font-size: 20px;
     font-weight: 800;
+}
+
+.iot-card-tooltip-ability {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

@@ -39,6 +39,60 @@ define([
                 ISLAND_ID: island.id,
                 ISLAND_CLASS: island.cssClass,
             });
-        }
+            this.createIslandTooltip(island);
+        },
+
+        createIslandTooltip: function (island)
+        { 
+            const args = this.getTooltipArgs(island);
+            this.game.addTooltipHtml('iot_island_' + island.id, this.game.utilities.formatBlock(ISLAND_TOOLTIP_TEMPLATE, args));
+        },
+
+        getTooltipArgs: function (island)
+        { 
+            return {
+                CARD_ID: island.id,
+                CARD_NAME: island.name,
+                CARD_CONTRACTS: this.getContractTooltipRows(island),
+            };
+        },
+
+        getContractTooltipRows: function (island)
+        { 
+            let contractRows = '';
+            for (let contractsKey in island.contracts) {
+                const contract = island.contracts[contractsKey];
+                const contractType = contract.type == PRIMARY ? PRIMARY_CONTRACT_LABEL : SECONDARY_CONTRACT_LABEL;
+                contractRows = contractRows + '<div class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">' + contractType + ': </span>' + this.getContractTooltipInfo(contract) + '</div>';
+            }
+            return contractRows;
+        },
+
+        getContractTooltipInfo: function (contract)
+        { 
+            let textInfo = '';
+            for (let cargoKey in contract.cargo) {
+                const cargo = contract.cargo[cargoKey];
+                textInfo = textInfo + this.getTooltipResourceIcon(cargo);
+            }
+            textInfo = textInfo + '---> ' + contract.points + ' ' + POINTS_LABEL;
+            return textInfo;
+        },
+
+        getTooltipResourceIcon: function (resource)
+        { 
+            switch (resource) {
+                case ANY:
+                    return '<span class="iot-resource-icon iot-any"></span>'
+                case BOX:
+                    return '<span class="iot-resource-icon iot-box"></span>';
+                case COAL:
+                    return '<span class="iot-resource-icon iot-coal"></span>';
+                case OIL:
+                    return '<span class="iot-resource-icon iot-oil"></span>';
+                default:
+                    return '';
+            }
+        },
     });
 });

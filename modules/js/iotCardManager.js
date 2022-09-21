@@ -34,7 +34,7 @@ define([
             for (let cardsInDeckKey in gamedata.cardsInDeck) {
                 const card = gamedata.cardsInDeck[cardsInDeckKey];
                 const cardDiv = 'iot_deck';
-                this.createCard(card, cardDiv, card.locationArg * -1, false);
+                this.createCard(card, cardDiv, card.locationArg * -1, false, false);
             }
             this.createDeckCounter(gamedata.cardsInDeck.length);
 
@@ -43,14 +43,13 @@ define([
                 const card = gamedata.cardsInDisplay[cardsInDisplayKey];
                 const cardDiv = 'iot_card_display';
                 this.createCard(card, cardDiv, 0);
-                this.createCardTooltip(card);
             }
 
             // Create discard
             for (let cardsInDiscardKey in gamedata.cardsInDiscard) {
                 const card = gamedata.cardsInDiscard[cardsInDiscardKey];
                 const cardDiv = 'iot_discard';
-                this.createCard(card, cardDiv, card.locationArg * -1, false);
+                this.createCard(card, cardDiv, card.locationArg * -1, true, false);
             }
 
             // Create hands
@@ -60,7 +59,6 @@ define([
                 if (card.locationArg == this.game.getCurrentPlayerId()) {
                     const cardDiv = 'iot_current_player_hand';
                     this.createCard(card, cardDiv, card.type);
-                    this.createCardTooltip(card);
                 }
             }
 
@@ -69,16 +67,18 @@ define([
                 const card = gamedata.cardsInTrain[cardsInTrainKey];
                 const cardDiv = 'iot_player_train_' + card.locationArg;
                 this.createCard(card, cardDiv, card.type);
-                this.createCardTooltip(card);
             }
         },
 
-        createCard: function (card, parentDiv, order, faceup = true) {
+        createCard: function (card, parentDiv, order, faceup = true, tooltip = true) {
             this.game.utilities.placeBlock(CARD_TEMPLATE, parentDiv, {
                 CARD_ID: card.id,
                 CARD_CLASS: faceup ? card.cssClass : 'iot-card-back',
                 CARD_ORDER: order,
             });
+            if (tooltip) {
+                this.createCardTooltip(card);
+            }
         },
 
         createDeckCounter: function (deckCount) {
@@ -93,20 +93,17 @@ define([
 
         getTooltipArgs: function (card)
         { 
-            switch (card.type) {
-                default:
-                    return {
-                        CARD_ID: card.id,
-                        CARD_NAME: card.name,
-                        CARD_COST: card.cost,
-                        CARD_POINTS: card.points,
-                        CARGO_ICON: this.getTooltipResourceIcon(card.cargo),
-                        WEIGHT_ROW: this.getTooltipWeightRow(card),
-                        CARGO_ROWS: this.getTooltipCargoRows(card),
-                        PASSENGER_ROW: this.getTooltipPassengerRow(card),
-                        CARD_ABILITY: this.getTooltipAbility(card),
-                    };
-            }
+            return {
+                CARD_ID: card.id,
+                CARD_NAME: card.name,
+                CARD_COST: card.cost,
+                POINTS_ROW: this.getTooltipPointsRow(card),
+                CARGO_ICON: this.getTooltipResourceIcon(card.cargo),
+                WEIGHT_ROW: this.getTooltipWeightRow(card),
+                CARGO_ROWS: this.getTooltipCargoRows(card),
+                PASSENGER_ROW: this.getTooltipPassengerRow(card),
+                CARD_ABILITY: this.getTooltipAbility(card),
+            };
         },
 
         getTooltipAbility: function (card)
@@ -123,7 +120,7 @@ define([
         getTooltipCargoRows: function (card)
         { 
             if (card.capacity > 0) {
-                return '<div id="tooltip_capacity_' + card.id + '" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">Cargo Capacity: </span>' + card.capacity + '</div><div id="tooltip_holds_' + card.id + '" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">Cargo Accepted: </span>' + this.getTooltipResourceIcon(card.holds) + '</div>';
+                return '<div id="tooltip_capacity_' + card.id + '" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">' + CARGO_CAPACITY_LABEL + ': </span>' + card.capacity + '</div><div id="tooltip_holds_' + card.id + '" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">' + CARGO_ACCEPTED_LABEL + ': </span>' + this.getTooltipResourceIcon(card.holds) + '</div>';
             }
             return '';
         },
@@ -132,6 +129,14 @@ define([
         { 
             if (card.passengers > 0) {
                 return '<div id="tooltip_passengers_' + card.id + '" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">' + PASSENGERS_LABEL + ': </span>' + card.passengers + '</div>';
+            }
+            return '';
+        },
+
+        getTooltipPointsRow: function (card)
+        { 
+            if (card.type != BUILDING) {
+                return '<div id="tooltip_points_'+card.id+'" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">'+POINTS_LABEL+': </span>'+card.points+'</div>';
             }
             return '';
         },
@@ -148,7 +153,7 @@ define([
                 case OIL:
                     return '<span class="iot-resource-icon iot-oil"></span>';
                 case PASSENGER:
-                    return '<span class="iot-resource-icon iot-passenger"></span>';
+                    return '<span class="iot-resource-icon iot-passenger-cargo"></span>';
                 default:
                     return '';
             }

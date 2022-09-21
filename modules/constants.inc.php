@@ -139,14 +139,25 @@ define('RESEARCH_STATION', 7);
  */
 define('CARD_TEMPLATE', 'jstpl_card');
 define('ISLAND_TEMPLATE', 'jstpl_island');
+define('ISLAND_TOOLTIP_TEMPLATE', 'jstpl_island_tooltip');
 define('PASSENGER_TEMPLATE', 'jstpl_passenger');
 define('TICKET_TEMPLATE', 'jstpl_ticket');
 define('TRAIN_TEMPLATE', 'jstpl_train');
 define('TRAIN_TOOLTIP_TEMPLATE', 'jstpl_train_tooltip');
 
 /**
- * TOOLTIP LABLES
+ * UI LABELS
  */
+define('ABILITY_LABEL', clienttranslate('Ability'));
+define('CARGO_LABEL', clienttranslate('Cargo'));
+define('CARGO_ACCEPTED_LABEL', clienttranslate('Cargo Accepted'));
+define('CARGO_CAPACITY_LABEL', clienttranslate('Cargo Capacity'));
+define('COST_LABEL', clienttranslate('Cost'));
+define('DELIVER_LABEL', clienttranslate('Deliver'));
 define('ENGINE_CAPACITY_LABEL', clienttranslate('Engine Capacity'));
 define('PASSENGERS_LABEL', clienttranslate('Passengers Upon Build'));
+define('POINTS_LABEL', clienttranslate('Points'));
+define('PRIMARY_CONTRACT_LABEL', clienttranslate('Primary Contract'));
+define('SECONDARY_CONTRACT_LABEL', clienttranslate('Secondary Contract'));
 define('WEIGHT_LABEL', clienttranslate('Weight'));
+define('YOUR_HAND_LABEL', clienttranslate('Your Hand'));

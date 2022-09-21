@@ -50,5 +50,10 @@ class view_isletrains_isletrains extends game_view
                 )
             );
         }
+
+        $this->tpl['ABILITY'] = ABILITY_LABEL;
+        $this->tpl['CARGO'] = CARGO_LABEL;
+        $this->tpl['COST'] = COST_LABEL;
+        $this->tpl['YOUR_HAND'] = YOUR_HAND_LABEL;
   	}
 }
