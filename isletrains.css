@@ -263,7 +263,6 @@ html {
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-    gap: 10px;
 }
 
 .iot-hand-card-count-container {
@@ -517,6 +516,21 @@ div.iot-passenger:hover {
     background-image: url('img/iotTrain.png');
 }
 
+/* Resource Icons */
+.iot-resource-icon {
+    display: inline-block;
+    position: relative;
+    width: 20.25px;
+    height: 20px;
+    background-image: url('img/iotResources.png');
+}
+
+.iot-box { background-position: 66.67% 0; }
+.iot-coal { background-position: 0 0; }
+.iot-oil { background-position: 33.33% 0; }
+.iot-passenger { background-position: 100% 0; }
+
+
 /* Ticket Tiles */
 .iot-ticket-tile {
     display: inline-block;
@@ -558,4 +572,35 @@ div.iot-passenger:hover {
     width: 104px;
     height: 70px;
     background-image: url('img/iotWeight.png');
+}
+
+
+/* Card Tooltip */
+.iot-card-tooltip {
+    display: grid;
+    position: relative;
+    place-content: center;
+    padding-right: 5px;
+}
+
+.iot-card-tooltip-label {
+    font-weight: 700;
+}
+
+.iot-card-tooltip-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 20px;
+    gap: 3px;
+    font-size: 15px;
+    padding: 4px;
+    border-left: 1px solid;
+}
+
+.iot-card-tooltip-title {
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+    font-weight: 800;
 }

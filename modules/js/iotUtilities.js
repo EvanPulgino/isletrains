@@ -58,6 +58,14 @@ define([
         { 
             dojo.addClass(elementDiv, HIDDEN);
         },
+
+        formatBlock: function (template, args)
+        { 
+            if (!args) {
+                args = [];
+            }
+            return this.format_block(template, args);
+        },
   
         /**
          * Create an html block from a jstpl template and place in parent div
@@ -71,7 +79,7 @@ define([
                 args = [];
             }
 
-            dojo.place(this.format_block(template, args), parentDiv);
+            dojo.place(this.formatBlock(template, args), parentDiv);
         },
   
         /**

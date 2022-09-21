@@ -142,3 +142,11 @@ define('ISLAND_TEMPLATE', 'jstpl_island');
 define('PASSENGER_TEMPLATE', 'jstpl_passenger');
 define('TICKET_TEMPLATE', 'jstpl_ticket');
 define('TRAIN_TEMPLATE', 'jstpl_train');
+define('TRAIN_TOOLTIP_TEMPLATE', 'jstpl_train_tooltip');
+
+/**
+ * TOOLTIP LABLES
+ */
+define('ENGINE_CAPACITY_LABEL', clienttranslate('Engine Capacity'));
+define('PASSENGERS_LABEL', clienttranslate('Passengers Upon Build'));
+define('WEIGHT_LABEL', clienttranslate('Weight'));

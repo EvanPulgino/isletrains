@@ -121,6 +121,17 @@ var jstpl_passenger = '<div id="iot_passenger_${PASSENGER_ID}" class="iot-passen
 var jstpl_train = '<div id="iot_progress_train" class="iot-progress-train"></div>';
 var jstpl_ticket = '<div id="iot_ticket_${TICKET_TYPE}" class="iot-ticket-tile ${TICKET_CLASS}"><div id="iot_ticket_${TICKET_TYPE}_space_1" class="iot-ticket-space"></div><div id="iot_ticket_${TICKET_TYPE}_space_2" class="iot-ticket-space"></div><div id="iot_ticket_${TICKET_TYPE}_space_3" class="iot-ticket-space"></div></div>';
 
+var jstpl_train_tooltip = '<div="iot_engine_tooltip_${CARD_ID}" class="iot-card-tooltip">\
+<div id="tooltip_title_${CARD_ID}" class="iot-card-tooltip-title">${CARD_NAME}</div>\
+<div id="tooltip_cost_${CARD_ID}" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">Cost: </span>${CARD_COST}</div>\
+<div id="tooltip_points_${CARD_ID}" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">Points: </span>${CARD_POINTS}</div>\
+<div id="tooltip_cargo_${CARD_ID}" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">Cargo: </span>${CARGO_ICON}</div>\
+${WEIGHT_ROW}\
+${CARGO_ROWS}\
+${PASSENGER_ROW}\
+<div id="ability${CARD_ID}" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">Ability: </span>${CARD_ABILITY}</div>\
+</div>';
+
 </script>  
 
 {OVERALL_GAME_FOOTER}

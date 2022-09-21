@@ -43,6 +43,7 @@ define([
                 const card = gamedata.cardsInDisplay[cardsInDisplayKey];
                 const cardDiv = 'iot_card_display';
                 this.createCard(card, cardDiv, 0);
+                this.createCardTooltip(card);
             }
 
             // Create discard
@@ -59,7 +60,7 @@ define([
                 if (card.locationArg == this.game.getCurrentPlayerId()) {
                     const cardDiv = 'iot_current_player_hand';
                     this.createCard(card, cardDiv, card.type);
-
+                    this.createCardTooltip(card);
                 }
             }
 
@@ -68,6 +69,7 @@ define([
                 const card = gamedata.cardsInTrain[cardsInTrainKey];
                 const cardDiv = 'iot_player_train_' + card.locationArg;
                 this.createCard(card, cardDiv, card.type);
+                this.createCardTooltip(card);
             }
         },
 
@@ -82,6 +84,84 @@ define([
         createDeckCounter: function (deckCount) {
             this.deckCounter.create('iot_deck_counter');
             this.deckCounter.setValue(deckCount);
-        }
+        },
+
+        createCardTooltip: function (card) {
+            const args = this.getTooltipArgs(card);
+            this.game.addTooltipHtml('iot_card_' + card.id, this.game.utilities.formatBlock(TRAIN_TOOLTIP_TEMPLATE, args));
+        },
+
+        getTooltipArgs: function (card)
+        { 
+            switch (card.type) {
+                default:
+                    return {
+                        CARD_ID: card.id,
+                        CARD_NAME: card.name,
+                        CARD_COST: card.cost,
+                        CARD_POINTS: card.points,
+                        CARGO_ICON: this.getTooltipResourceIcon(card.cargo),
+                        WEIGHT_ROW: this.getTooltipWeightRow(card),
+                        CARGO_ROWS: this.getTooltipCargoRows(card),
+                        PASSENGER_ROW: this.getTooltipPassengerRow(card),
+                        CARD_ABILITY: this.getTooltipAbility(card),
+                    };
+            }
+        },
+
+        getTooltipAbility: function (card)
+        { 
+            let tooltip = card.actionTypes[0].actionTooltip;
+
+            if (card.actionTypes.length > 1) {
+                tooltip = tooltip + ' AND ' + card.actionTypes[1].actionTooltip;
+            }
+
+            return tooltip;
+        },
+
+        getTooltipCargoRows: function (card)
+        { 
+            if (card.capacity > 0) {
+                return '<div id="tooltip_capacity_' + card.id + '" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">Cargo Capacity: </span>' + card.capacity + '</div><div id="tooltip_holds_' + card.id + '" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">Cargo Accepted: </span>' + this.getTooltipResourceIcon(card.holds) + '</div>';
+            }
+            return '';
+        },
+
+        getTooltipPassengerRow: function (card)
+        { 
+            if (card.passengers > 0) {
+                return '<div id="tooltip_passengers_' + card.id + '" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">' + PASSENGERS_LABEL + ': </span>' + card.passengers + '</div>';
+            }
+            return '';
+        },
+
+        getTooltipResourceIcon: function (resource)
+        { 
+            switch (resource) {
+                case ANY:
+                    return '<span class="iot-resource-icon iot-coal"></span> \/ <span class="iot-resource-icon iot-oil"></span> \/ <span class="iot-resource-icon iot-box"></span>'
+                case BOX:
+                    return '<span class="iot-resource-icon iot-box"></span>';
+                case COAL:
+                    return '<span class="iot-resource-icon iot-coal"></span>';
+                case OIL:
+                    return '<span class="iot-resource-icon iot-oil"></span>';
+                case PASSENGER:
+                    return '<span class="iot-resource-icon iot-passenger"></span>';
+                default:
+                    return '';
+            }
+        },
+
+        getTooltipWeightRow: function (card)
+        { 
+            if (card.weight != 0) {
+                const label = card.weight > 0 ? ENGINE_CAPACITY_LABEL : WEIGHT_LABEL;
+                const val = Math.abs(card.weight);
+                return '<div id="tooltip_weight_' + card.id + '" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">' + label + ': </span>' + val + '</div>';
+            }
+            return '';
+        },
     });
 });
