@@ -67,7 +67,7 @@ $machinestates = array(
         "descriptionmyturn" => clienttranslate('${you} must select an action to perform'),
         "type" => "activeplayer",
         "args" => "argsPlayerTurn",
-        "possibleactions" => array( BUILD, DELIVER, LOAD, TAKE_CARDS ),
+        "possibleactions" => array( BUILD, DELIVER, LOAD, DRAW_CARD, DRAW_DECK_CARD ),
         "transitions" => array( NEXT_ACTION => STATE_PLAYER_TURN, NEXT_PLAYER => STATE_NEXT_PLAYER )
     ),
     

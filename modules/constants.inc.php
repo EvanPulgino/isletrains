@@ -22,6 +22,8 @@ define('BUILD', 'build');
 define('DELIVER', 'deliver');
 define('DELIVER_OR_LOAD', 'deliverOrLoad');
 define('DISCARD_CARDS', 'discardCards');
+define('DRAW_CARD', 'drawCard');
+define('DRAW_DECK_CARD', 'drawDeckCard');
 define('GAIN_ABILITY', 'gainAbility');
 define('GAIN_END_GAME_SCORING', 'gainEndGameScoring');
 define('LOAD', 'load');

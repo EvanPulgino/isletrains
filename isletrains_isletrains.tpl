@@ -115,7 +115,7 @@
 
 <script type="text/javascript">
 
-var jstpl_card = '<div id="iot_card_${CARD_ID}" class="iot-card ${CARD_CLASS}" style="order:${CARD_ORDER};"></div>';
+var jstpl_card = '<div id="iot_card_${CARD_ID}" card_id="${CARD_ID}" class="iot-card ${CARD_CLASS}" style="order:${CARD_ORDER};"></div>';
 var jstpl_island = '<div id="iot_island_${ISLAND_ID}" class="iot-island-card ${ISLAND_CLASS}"></div>';
 var jstpl_island_tooltip = '<div id="iot_island_tooltip_${CARD_ID}" class="iot-card-tooltip"><div id="tooltip_title_${CARD_ID}" class="iot-card-tooltip-title">${CARD_NAME}</div>${CARD_CONTRACTS}</div>';
 var jstpl_passenger = '<div id="iot_passenger_${PASSENGER_ID}" class="iot-passenger ${PASSENGER_CLASS}"></div>';

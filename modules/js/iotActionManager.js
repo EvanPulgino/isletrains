@@ -38,6 +38,11 @@ define([
             }
             return false;
         },
+
+        canDeliver: function ()
+        {
+
+        },
         
         canLoad: function (card, cardsInHand, passengers)
         {
@@ -77,6 +82,11 @@ define([
             }
         },
 
+        highlightDeliveryCards: function (args)
+        {
+
+        },
+
         highlightLoadCards: function (args)
         {
             for (let cardsInTrainKey in args.cardsInTrain) {
@@ -90,8 +100,23 @@ define([
 
         highlightTakeCards: function()
         {
-            dojo.query('#iot_deck_counter_container').addClass('iot-clickable');
+            dojo.addClass('iot_deck_counter_container', 'iot-clickable');
+            this.connect($('iot_deck_counter_container'), 'onclick', 'onTakeTopCard');
             dojo.query('#iot_card_display > div').addClass('iot-clickable');
+            dojo.query('#iot_card_display > div').connect('onclick', this, 'onTakeCard');
+        },
+
+        onTakeCard: function (event)
+        {
+            dojo.stopEvent(event);
+            const cardId = event.target.attributes['card_id'].value;
+            this.game.utilities.triggerPlayerAction(DRAW_CARD, { cardId: cardId });
+        },
+
+        onTakeTopCard: function (event)
+        {
+            dojo.stopEvent(event);
+            this.game.utilities.triggerPlayerAction(DRAW_DECK_CARD, {});
         },
 
         setupPlayerTurn: function (args)

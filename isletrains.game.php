@@ -16,7 +16,6 @@
   *
   */
 
-
 require_once( APP_GAMEMODULE_PATH.'module/table/table.game.php' );
 require_once('modules/constants.inc.php');
 require_once('modules/php/iotActionManager.class.php');
@@ -105,6 +104,7 @@ class IsleTrains extends Table
         $gamedata = [
             'constants' => get_defined_constants(true)['user'],
             'cardsInBuildingSlot' => $this->cardManager->getUiData(BUILDING_SLOT),
+            'cardsInCargo' => $this->cardManager->getUiData(CARGO),
             'cardsInDeck' => $this->cardManager->getUiData(DECK),
             'cardsInDiscard' => $this->cardManager->getUiData(DISCARD),
             'cardsInDisplay' => $this->cardManager->getUiData(DISPLAY),
@@ -201,9 +201,13 @@ class IsleTrains extends Table
     function argsPlayerTurn()
     {
         return array(
-            'cardsInHand' => $this->cardManager->getUiData(HAND, self::getCurrentPlayerId()),
+            'cardsInCargo' => $this->cardManager->getUiData(CARGO, self::getActivePlayerId()),
+            'cardsInHand' => $this->cardManager->getUiData(HAND, self::getActivePlayerId()),
             'cardsInTrain' => $this->cardManager->getUiData(TRAIN),
-            'passengers' => $this->passengerManager->getUiData(TABLEAU, self::getCurrentPlayerId()),
+            'islands' => $this->islandManager->getUiData(ISLAND),
+            'passengers' => $this->passengerManager->getUiData(TABLEAU, self::getActivePlayerId()),
+            'ticketPassengers' => $this->passengerManager->getUiData(TICKET),
+            'tickets' => $this->ticketManager->getUiData(),
         );
     }
 

@@ -65,6 +65,11 @@ define([
             this.playerWeightCounters[player.id].setValue(player.weight);
         },
 
+        incrementPlayerHandCounter: function (playerId, delta)
+        {
+            this.playerHandCounters[playerId].incValue(delta);
+        },
+
         incrementPlayerHandCounterNoAnimation: function (playerId, delta)
         { 
             const currentValue = this.playerHandCounters[playerId].getValue();

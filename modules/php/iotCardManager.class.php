@@ -58,6 +58,42 @@ class IsleOfTrainsCardManager extends APP_GameClass
         $this->cards->pickCardsForLocation(3, DECK, DISPLAY);
     }
 
+    public function drawCard($cardId)
+    {
+        $activePlayer = $this->game->getActivePlayerId();
+        $card = self::moveCard($cardId, HAND, $activePlayer);
+        $this->game->notifyAllPlayers(
+            DRAW_CARD,
+            clienttranslate('${player_name} takes ${cardName} into their hand'),
+            array(
+                'player_name' => $this->game->getActivePlayerName(),
+                'cardName' => $card->getName(),
+                'card' => $card->getUiData(),
+                'fromDeck' => false,
+            )
+        );
+    }
+
+    public function drawDeckCard()
+    {
+        $activePlayer = $this->game->getActivePlayerId();
+        $drawnCard = self::drawTopCardFromDeck($activePlayer);
+        $this->game->notifyAllPlayers(
+            DRAW_CARD,
+            clienttranslate('${player_name} draws a card from the deck'),
+            array(
+                'player_name' => $this->game->getActivePlayerName(),
+                'card' => $drawnCard->getUiData(),
+                'fromDeck' => true,
+            )
+        );
+    }
+
+    public function drawTopCardFromDeck($playerId)
+    {
+        return self::getCard($this->cards->pickCard(DECK, $playerId));
+    }
+
     /**
      * Factory for creating Card object
      * @param mixed $row Row from Card database table
@@ -88,5 +124,11 @@ class IsleOfTrainsCardManager extends APP_GameClass
             $uiData[] = $card->getUiData();
         }
         return $uiData;
+    }
+
+    public function moveCard($cardId, $location, $locationArg = null)
+    {
+        $this->cards->moveCard($cardId, $location, $locationArg);
+        return self::getCard($this->cards->getCard($cardId));
     }
 }

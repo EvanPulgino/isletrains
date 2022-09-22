@@ -18,6 +18,7 @@ var debug = isDebug ? console.info.bind(window.console) : function(){};
 define([
     'dojo',
     'dojo/_base/declare',
+    'dojo/on',
     'ebg/core/gamegui',
     'ebg/counter',
 ], (dojo, declare, on) => {
@@ -68,6 +69,8 @@ define([
                 const cardDiv = 'iot_player_train_' + card.locationArg;
                 this.createCard(card, cardDiv, card.type);
             }
+
+            this.setupNotifications();
         },
 
         createCard: function (card, parentDiv, order, faceup = true, tooltip = true) {
@@ -171,6 +174,50 @@ define([
                 return '<div id="tooltip_weight_' + card.id + '" class="iot-card-tooltip-row"><span class="iot-card-tooltip-label">' + label + ': </span>' + val + '</div>';
             }
             return '';
+        },
+
+        incrementDeckCounter: function (delta)
+        {
+            this.deckCounter.incValue(delta);
+        },
+
+        setupNotifications: function ()
+        {
+            dojo.subscribe(DRAW_CARD, this, 'notif_drawCard');
+        },
+
+        notif_drawCard: function (notif)
+        {
+            const playerId = this.game.getActivePlayerId();
+            const card = notif.args.card;
+            const cardElement = 'iot_card_' + card.id;
+            const fromDeck = notif.args.fromDeck;
+
+            if (this.game.isCurrentPlayerActive()) {
+                const activePlayerHand = 'iot_current_player_hand';
+
+                $(cardElement).style.removeProperty('order');
+                dojo.setStyle(cardElement, 'order', card.type);
+
+                this.attachToNewParent(cardElement, activePlayerHand);
+                var moveCard = this.slideToObject(cardElement, activePlayerHand).play();
+                if (fromDeck) {
+                    dojo.removeClass(cardElement, 'iot-card-back');
+                    dojo.addClass(cardElement, card.cssClass);
+                }
+                on(moveCard, "End", function () {
+                    $(cardElement).style.removeProperty('top');
+                    $(cardElement).style.removeProperty('left');
+                })
+            } else {
+                const activePlayerCardCounter = 'iot_hand_card_count_container_' + playerId;
+                this.game.slideToObjectAndDestroy(cardElement, activePlayerCardCounter);
+            }
+
+            if (fromDeck) {
+                this.incrementDeckCounter(-1);
+            }
+            this.game.playerManager.incrementPlayerHandCounter(playerId, 1);
         },
     });
 });

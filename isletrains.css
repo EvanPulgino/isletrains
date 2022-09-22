@@ -69,8 +69,12 @@ html {
 }
 
 .iot-clickable {
-    border: 2px solid var(--iot-highlight-color) !important;
+    border: 5px solid azure !important;
     cursor: pointer;
+}
+
+.iot-clickable:hover {
+    border: 5px solid var(--iot-highlight-color) !important;
 }
 
 .iot-hidden {
@@ -147,8 +151,8 @@ html {
 #iot_deck_counter_container {
     display: grid;
     position: relative;
-    width: 262px;
-    height: 183px;
+    width: 257px;
+    height: 175px;
     border-radius: 10px;
     order: 1 !important;
     place-content: center;
