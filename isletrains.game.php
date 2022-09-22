@@ -19,6 +19,7 @@
 
 require_once( APP_GAMEMODULE_PATH.'module/table/table.game.php' );
 require_once('modules/constants.inc.php');
+require_once('modules/php/iotActionManager.class.php');
 require_once('modules/php/iotCardManager.class.php');
 require_once('modules/php/iotIslandManager.class.php');
 require_once('modules/php/iotPassengerManager.class.php');
@@ -38,9 +39,12 @@ class IsleTrains extends Table
         parent::__construct();
         
         self::initGameStateLabels( array(
-            CURRENT_PROGRESS => 10,
+            ACTION_NUMBER => 10,
+            CURRENT_PROGRESS => 11,
+            SELECTED_ACTION => 12,
         ));
 
+        $this->actionManager = new IsleOfTrainsActionManager($this);
         $this->cardManager = new IsleOfTrainsCardManager($this);
         $this->islandManager = new IsleOfTrainsIslandManager($this);
         $this->passengerManager = new IsleOfTrainsPassengerManager($this);
@@ -67,22 +71,17 @@ class IsleTrains extends Table
         $this->playerManager->setupNewGame($players);
         $updatedPlayers = $this->playerManager->getPlayers();
 
+        $this->actionManager->setupNewGame();
         $this->cardManager->setupNewGame($updatedPlayers);
         $this->islandManager->setupNewGame(count($updatedPlayers));
         $this->passengerManager->setupNewGame($updatedPlayers);
         $this->progressManager->setupNewGame();
         $this->ticketManager->setupNewGame();
         
-        // Init global values with their initial values
-        //self::setGameStateInitialValue( 'my_first_global_variable', 0 );
-        
         // Init game statistics
         // (note: statistics used in this file must be defined in your stats.inc.php file)
         //self::initStat( 'table', 'table_teststat1', 0 );    // Init a table statistics
-        //self::initStat( 'player', 'player_teststat1', 0 );  // Init a player statistics (for all players)
-
-        // TODO: setup the initial game situation here
-       
+        //self::initStat( 'player', 'player_teststat1', 0 );  // Init a player statistics (for all players)       
 
         // Activate first player (which is in general a good idea :) )
         $this->activeNextPlayer();
@@ -101,8 +100,7 @@ class IsleTrains extends Table
     */
     protected function getAllDatas()
     {    
-        $current_player_id = self::getCurrentPlayerId();    // !! We must only return informations visible by this player !!
-        $sql = "SELECT player_id id, player_score score FROM player ";
+        $sql = "SELECT player_id id, player_score score FROM player";
 
         $gamedata = [
             'constants' => get_defined_constants(true)['user'],
@@ -137,8 +135,6 @@ class IsleTrains extends Table
     */
     function getGameProgression()
     {
-        // TODO: compute and return the game progression
-
         return 0;
     }
 
@@ -202,22 +198,14 @@ class IsleTrains extends Table
         game state.
     */
 
-    /*
-    
-    Example for game state "MyGameState":
-    
-    function argMyGameState()
+    function argsPlayerTurn()
     {
-        // Get some values from the current game situation in database...
-    
-        // return values:
         return array(
-            'variable1' => $value1,
-            'variable2' => $value2,
-            ...
+            'cardsInHand' => $this->cardManager->getUiData(HAND, self::getCurrentPlayerId()),
+            'cardsInTrain' => $this->cardManager->getUiData(TRAIN),
+            'passengers' => $this->passengerManager->getUiData(TABLEAU, self::getCurrentPlayerId()),
         );
-    }    
-    */
+    }
 
 //////////////////////////////////////////////////////////////////////////////
 //////////// Game state actions
@@ -228,18 +216,12 @@ class IsleTrains extends Table
         The action method of state X is called everytime the current game state is set to X.
     */
     
-    /*
-    
-    Example for game state "MyGameState":
-
-    function stMyGameState()
+    function stNextPlayer()
     {
-        // Do some stuff ...
-        
-        // (very often) go to another gamestate
-        $this->gamestate->nextState( 'some_gamestate_transition' );
-    }    
-    */
+        $player_id = self::activeNextPlayer();
+        self::giveExtraTime($player_id);
+        $this->gamestate->nextState("nextTurn");
+    }
 
 //////////////////////////////////////////////////////////////////////////////
 //////////// Zombie

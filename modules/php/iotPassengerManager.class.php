@@ -50,18 +50,18 @@ class IsleOfTrainsPassengerManager extends APP_GameClass
         return new IsleOfTrainsPassenger($this->game, $row);
     }
 
-    public function getPassengers($location)
+    public function getPassengers($location, $locationArg = null)
     {
-        $passengers = $this->passengers->getCardsInLocation($location);
+        $passengers = $this->passengers->getCardsInLocation($location, $locationArg);
         return array_map(function($passenger) {
             return self::getPassenger($passenger);
         }, $passengers);
     }
 
-    public function getUiData($location)
+    public function getUiData($location, $locationArg = null)
     {
         $uiData = [];
-        foreach(self::getPassengers($location) as $passenger) {
+        foreach(self::getPassengers($location, $locationArg) as $passenger) {
             $uiData[] = $passenger->getUiData();
         }
         return $uiData;

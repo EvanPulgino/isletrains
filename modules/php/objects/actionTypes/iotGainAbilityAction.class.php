@@ -38,9 +38,9 @@ class IsleOfTrainsGainAbilityActionType extends IsleOfTrainsActionType
             case 5:
                 return clienttranslate('Train cards copst 1 less to build when extending your train. This caboose does not give any benefits for upgrading your cars.');
             case 6:
-                return clienttranslate('Your weight capacity is increased by 2.');
+                return clienttranslate('Your engine capacity is increased by 2.');
             case 7:
-                return clienttranslate('Once per Delivery action, you may deliver a passenger to a constract as if they were any cargo type. The passenger delivered in this way is returned to the passenger bag.');
+                return clienttranslate('Once per Delivery action, you may deliver a passenger to a contract as if they were any cargo type. The passenger delivered in this way is returned to the passenger bag.');
             case 8:
                 return clienttranslate('When you load a passenger, take 2 cards');
             case 9:

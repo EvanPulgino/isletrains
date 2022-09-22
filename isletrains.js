@@ -21,6 +21,7 @@ define([
     "dojo","dojo/_base/declare",
     "ebg/core/gamegui",
     "ebg/counter",
+    g_gamethemeurl + "modules/js/iotActionManager.js",
     g_gamethemeurl + "modules/js/iotCardManager.js",
     g_gamethemeurl + "modules/js/iotIslandManager.js",
     g_gamethemeurl + "modules/js/iotPassengerManager.js",
@@ -32,6 +33,7 @@ define([
 function (dojo, declare) {
     return declare("bgagame.isletrains", ebg.core.gamegui, {
         constructor: function () {
+            this.actionManager = new iot.actionManager(this);
             this.cardManager = new iot.cardManager(this);
             this.islandManager = new iot.islandManager(this);
             this.passengerManager = new iot.passengerManager(this);
@@ -54,7 +56,7 @@ function (dojo, declare) {
             "gamedatas" argument contains all datas retrieved by your "getAllDatas" PHP method.
         */
         
-        setup: function( gamedata )
+        setup: function(gamedata)
         {
             debug('GAMEDATA', gamedata);
             
@@ -80,33 +82,26 @@ function (dojo, declare) {
         // onEnteringState: this method is called each time we are entering into a new game state.
         //                  You can use this method to perform some user interface changes at this moment.
         //
-        onEnteringState: function( stateName, args )
-        {            
-            switch( stateName )
+        onEnteringState: function(stateName, args)
+        {
+            switch(stateName)
             {
-            
-            /* Example:
-            
-            case 'myGameState':
-            
-                // Show some HTML block at this game state
-                dojo.style( 'my_html_block_id', 'display', 'block' );
-                
-                break;
-           */
-           
-           
-            case 'dummmy':
-                break;
+                case PLAYER_TURN:
+                    if (this.isCurrentPlayerActive()) {
+                        this.actionManager.setupPlayerTurn(args.args);
+                    }
+                    break;
+                default:
+                    break;
             }
         },
 
         // onLeavingState: this method is called each time we are leaving a game state.
         //                 You can use this method to perform some user interface changes at this moment.
         //
-        onLeavingState: function( stateName )
+        onLeavingState: function(stateName)
         {            
-            switch( stateName )
+            switch(stateName)
             {
             
             /* Example:
@@ -128,11 +123,11 @@ function (dojo, declare) {
         // onUpdateActionButtons: in this method you can manage "action buttons" that are displayed in the
         //                        action status bar (ie: the HTML links in the status bar).
         //        
-        onUpdateActionButtons: function( stateName, args )
+        onUpdateActionButtons: function(stateName, args)
         {                      
-            if( this.isCurrentPlayerActive() )
+            if(this.isCurrentPlayerActive())
             {            
-                switch( stateName )
+                switch(stateName)
                 {
 /*               
                  Example:

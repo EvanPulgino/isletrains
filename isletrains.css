@@ -46,6 +46,10 @@
 /* Note: you must not use any @import directive */
 
 /* General Classes */
+:root {
+    --iot-highlight-color: orangered;
+}
+
 html {
     background-image: url('img/iotTable.jpg');
     font-size: calc(15px + 0.390625vw);
@@ -62,6 +66,11 @@ html {
 .whiteblock {
     background-image: unset !important;
     background-color: rgba(245, 245, 245, .5);
+}
+
+.iot-clickable {
+    border: 2px solid var(--iot-highlight-color) !important;
+    cursor: pointer;
 }
 
 .iot-hidden {
@@ -140,16 +149,17 @@ html {
     position: relative;
     width: 262px;
     height: 183px;
+    border-radius: 10px;
     order: 1 !important;
     place-content: center;
+    z-index: 100;
 }
 
 #iot_deck_counter {
-    position: re;
     font-size: 100px;
     font-weight: 800;
     text-shadow: .05rem 0 .05rem whitesmoke, 0 -.05rem .05rem whitesmoke, 0 .05rem .05rem whitesmoke, -.05rem 0 .05rem whitesmoke;
-    z-index: 100;
+    z-index: 99;
 }
 
 #iot_card_display {

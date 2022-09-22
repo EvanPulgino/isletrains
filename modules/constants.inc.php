@@ -79,15 +79,45 @@ define('TYPE_ARG', 'type_arg');
 define('ZOMBIE', 'zombie');
 
 /**
+ * GAME STATES
+ */
+define('STATE_GAME_SETUP', 1);
+define('STATE_PLAYER_TURN', 2);
+define('STATE_NEXT_PLAYER', 3);
+define('STATE_GAME_END', 99);
+
+/**
+ * GAME STATE NAMES
+ */
+define('END_GAME', 'endGame');
+define('NEXT_ACTION', 'nextAction');
+define('NEXT_PLAYER', 'nextPlayer');
+define('NEXT_TURN', 'nextTurn');
+define('PLAYER_TURN', 'playerTurn');
+
+/**
  * GLOBAL VARIABLES
  */
+define('ACTION_NUMBER', 'actionNumber');
 define('CURRENT_PROGRESS', 'currentProgress');
+define('SELECTED_ACTION', 'selectedAction');
 
 /**
  * FLIPPED STATUS
  */
 define('UNFLIPPED', 1);
 define('FLIPPED', 2);
+
+/**
+ * ISLAND TYPES
+ */
+define('FLINT_BEACH', 1);
+define('CAMP_EAGLE', 2);
+define('DEVON_CITY', 3);
+define('CACTUS_MINES', 4);
+define('BILLINGTONS', 5);
+define('ALPINE_LODGE', 6);
+define('RESEARCH_STATION', 7);
 
 /**
  * LOCATIONS
@@ -122,17 +152,6 @@ define('PASSENGERS', 'passengers');
 define('POINTS', 'points');
 define('TICKET_SPACES', 'ticketSpaces');
 define('WEIGHT', 'weight');
-
-/**
- * ISLAND TYPES
- */
-define('FLINT_BEACH', 1);
-define('CAMP_EAGLE', 2);
-define('DEVON_CITY', 3);
-define('CACTUS_MINES', 4);
-define('BILLINGTONS', 5);
-define('ALPINE_LODGE', 6);
-define('RESEARCH_STATION', 7);
 
 /**
  * JSTPL TEMPLATES

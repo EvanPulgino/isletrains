@@ -33,6 +33,11 @@ define([
         setup: function (gamedata) {
             for (let playerInfoKey in gamedata.playerInfo) {
                 const player = gamedata.playerInfo[playerInfoKey];
+
+                if (this.game.getCurrentPlayerId() == player.id) {
+                    document.querySelector(':root').style.setProperty('--iot-highlight-color', '#' + player.color);
+                }
+
                 this.createPlayerHandCounter(player);
                 this.createPlayerPointCounter(player);
                 this.createPlayerWeightCounter(player);

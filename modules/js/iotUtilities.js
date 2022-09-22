@@ -86,9 +86,8 @@ define([
          * Remove all styles potentially added for game states
          */
         removeAllTemporaryStyles: function ()
-        { 
-            // dojo.query('.dgit-clickable').removeClass('dgit-clickable');
-            // dojo.query('.dgit-highlight').removeClass('dgit-highlight');
+        {
+            dojo.query('.iot-clickable').removeClass('iot-clickable');
         },
  
         /**

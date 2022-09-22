@@ -73,18 +73,18 @@ class IsleOfTrainsCardManager extends APP_GameClass
      * @param string $location Location to get Cards from
      * @return array<IsleOfTrainsCard> Array of Card objects
      */
-    public function getCards($location)
+    public function getCards($location, $locationArg = null)
     {
-        $cards = $this->cards->getCardsInLocation($location);
+        $cards = $this->cards->getCardsInLocation($location, $locationArg);
         return array_map(function($card) {
             return self::getCard($card);
         }, $cards);
     }
 
-    public function getUiData($location)
+    public function getUiData($location, $locationArg = null)
     {
         $uiData = [];
-        foreach($this->getCards($location) as $card) {
+        foreach($this->getCards($location, $locationArg) as $card) {
             $uiData[] = $card->getUiData();
         }
         return $uiData;
