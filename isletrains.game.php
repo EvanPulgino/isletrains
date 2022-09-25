@@ -232,6 +232,12 @@ class IsleTrains extends Table
     
     function stNextPlayer()
     {
+        $cardDisplayCount = count($this->cardManager->getCards(DISPLAY));
+        if ($cardDisplayCount < 3) {
+            for($i = 0; $i < (3 - $cardDisplayCount); $i++) {
+                $this->cardManager->addCardToDisplay();
+            }
+        }
         $player_id = self::activeNextPlayer();
         self::giveExtraTime($player_id);
         $this->gamestate->nextState("nextTurn");

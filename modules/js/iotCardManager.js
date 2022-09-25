@@ -228,8 +228,28 @@ define([
 
         setupNotifications: function ()
         {
+            dojo.subscribe(ADD_CARD_TO_DISPLAY, this, 'notif_addCardToDisplay');
             dojo.subscribe(DISCARD_CARD, this, 'notif_discardCard');
             dojo.subscribe(DRAW_CARD, this, 'notif_drawCard');
+        },
+
+        notif_addCardToDisplay: function (notif)
+        {
+            const card = notif.args.card;
+            const cardElement = 'iot_card_' + card.id;
+            const cardDisplay = 'iot_card_display';
+
+            $(cardElement).style.removeProperty('order');
+            dojo.setStyle(cardElement, 'order', 0);
+            this.attachToNewParent(cardElement, cardDisplay);
+            var moveCard = this.slideToObject(cardElement, cardDisplay).play();
+            dojo.removeClass(cardElement, 'iot-card-back');
+            dojo.addClass(cardElement, card.cssClass);
+            on(moveCard, "End", function () {
+                $(cardElement).style.removeProperty('top');
+                $(cardElement).style.removeProperty('left');
+            });
+            this.incrementDeckCounter(-1);
         },
 
         notif_discardCard: function (notif)

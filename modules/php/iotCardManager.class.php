@@ -57,6 +57,20 @@ class IsleOfTrainsCardManager extends APP_GameClass
         // Deal 3 cards to display
         $this->cards->pickCardsForLocation(3, DECK, DISPLAY);
     }
+
+    public function addCardToDisplay()
+    {
+        $card = $this->pickCardForLocation(DECK, DISPLAY);
+        $this->game->notifyAllPlayers(
+            ADD_CARD_TO_DISPLAY,    
+            clienttranslate('${cardName} added to display'),
+            array(
+                'cardName' => $card->getName(),
+                'card' => $card->getUiData(),
+            )
+        );
+    }
+
     public function drawCard($args)
     {
         $cardId = $args['cardId'];
@@ -146,6 +160,10 @@ class IsleOfTrainsCardManager extends APP_GameClass
             $uiData[] = $card->getUiData();
         }
         return $uiData;
+    }
+
+    public function pickCardForLocation($from, $to){
+        return self::getCard($this->cards->pickCardForLocation(DECK, DISPLAY));
     }
 
     public function moveCard($cardId, $location, $locationArg = null)

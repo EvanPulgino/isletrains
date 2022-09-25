@@ -18,6 +18,7 @@
  * ACTION TYPES
  */
 define('ACTION', 'action');
+define('ADD_CARD_TO_DISPLAY', 'addCardToDisplay');
 define('BUILD', 'build');
 define('DELIVER', 'deliver');
 define('DELIVER_OR_LOAD', 'deliverOrLoad');
