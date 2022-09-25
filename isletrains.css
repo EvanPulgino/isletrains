@@ -175,7 +175,7 @@ html {
 }
 
 #iot_discard {
-    --gap: -263px;
+    --gap: -260px;
     position: relative;
     display: flex;
     flex-flow: row wrap;

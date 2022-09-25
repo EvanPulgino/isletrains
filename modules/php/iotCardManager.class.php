@@ -57,7 +57,6 @@ class IsleOfTrainsCardManager extends APP_GameClass
         // Deal 3 cards to display
         $this->cards->pickCardsForLocation(3, DECK, DISPLAY);
     }
-
     public function drawCard($args)
     {
         $cardId = $args['cardId'];
@@ -95,6 +94,28 @@ class IsleOfTrainsCardManager extends APP_GameClass
         return self::getCard($this->cards->pickCard(DECK, $playerId));
     }
 
+    public function endTurnDiscard($cardId)
+    {
+        $activePlayer = $this->game->getActivePlayerId();
+        $card = self::moveCard($cardId, DISCARD);
+        $this->game->notifyAllPlayers(
+            DISCARD_CARD,
+            clienttranslate('${player_name} discards ${cardName}'),
+            array(
+                'player_name' => $this->game->getActivePlayerName(),
+                'cardName' => $card->getName(),
+                'card' => $card->getUiData(),
+            )
+        );
+
+        $this->game->actionManager->incDiscardNumber(-1);
+        if($this->game->actionManager->getDiscardNumber() > 0) {
+            $this->game->gamestate->nextState(PLAYER_DISCARD);
+        } else {
+            $this->game->gamestate->nextState(NEXT_PLAYER);
+        }
+    }
+
     /**
      * Factory for creating Card object
      * @param mixed $row Row from Card database table
@@ -112,7 +133,7 @@ class IsleOfTrainsCardManager extends APP_GameClass
      */
     public function getCards($location, $locationArg = null)
     {
-        $cards = $this->cards->getCardsInLocation($location, $locationArg);
+        $cards = $locationArg == null ? $this->cards->getCardsInLocation($location)  : $this->cards->getCardsInLocation($location, $locationArg);
         return array_map(function($card) {
             return self::getCard($card);
         }, $cards);
@@ -129,7 +150,7 @@ class IsleOfTrainsCardManager extends APP_GameClass
 
     public function moveCard($cardId, $location, $locationArg = null)
     {
-        $this->cards->moveCard($cardId, $location, $locationArg);
+        $locationArg == null ? $this->cards->moveCard($cardId, $location) : $this->cards->moveCard($cardId, $location, $locationArg);
         return self::getCard($this->cards->getCard($cardId));
     }
 }

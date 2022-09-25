@@ -84,12 +84,16 @@ function (dojo, declare) {
         //
         onEnteringState: function(stateName, args)
         {
-            console.log(stateName);
             switch(stateName)
             {
                 case PLAYER_TURN:
                     if (this.isCurrentPlayerActive()) {
-                        this.actionManager.setupPlayerTurn(args.args);
+                        this.setupPlayerTurn(args.args);
+                    }
+                    break;
+                case PLAYER_DISCARD:
+                    if (this.isCurrentPlayerActive()) {
+                        this.setupPlayerEndTurnDiscard();
                     }
                     break;
                 default:
@@ -148,13 +152,69 @@ function (dojo, declare) {
 
         ///////////////////////////////////////////////////
         //// Utility methods
+
+        highlightBuildCards: function (args)
+        {
+            const canSpend = args.cardsInHand.length - 1;
+            for (let cardsInHandKey in args.cardsInHand) {
+                const card = args.cardsInHand[cardsInHandKey];
+                if (this.cardManager.canBuild(card, args.cardsInTrain, canSpend)) {
+                    const cardId = 'iot_card_' + card.id;
+                    dojo.addClass(cardId, 'iot-clickable');
+                }
+            }
+        },
+
+        highlightDeliveryCards: function (args)
+        {
+
+        },
+
+        highlightLoadCards: function (args)
+        {
+            for (let cardsInTrainKey in args.cardsInTrain) {
+                const card = args.cardsInTrain[cardsInTrainKey];
+                if (this.cardManager.canLoad(card, args.cardsInHand, args.passengers)) {
+                    const cardId = 'iot_card_' + card.id;
+                    dojo.addClass(cardId, 'iot-clickable');
+                }
+            }
+        },
+
+        highlightTakeCards: function()
+        {
+            dojo.addClass('iot_deck_counter_container', 'iot-clickable');
+            this.connect($('iot_deck_counter_container'), 'onclick', 'onTakeTopCard');
+            const displayCards = dojo.query('#iot_card_display > div');
+            for (let displayCardsKey in displayCards) {
+                const displayCard = displayCards[displayCardsKey];
+                const id = displayCard.id;
+                if (id) {
+                    dojo.addClass(id, 'iot-clickable');
+                    this.connect($(id), 'onclick', 'onTakeCard');
+                }
+            }
+        },
         
-        /*
-        
-            Here, you can defines some utility methods that you can use everywhere in your javascript
-            script.
-        
-        */
+        setupPlayerEndTurnDiscard: function ()
+        {
+            const handCards = dojo.query('#iot_current_player_hand > div');
+            for (let handCardsKey in handCards) {
+                const handCard = handCards[handCardsKey];
+                const id = handCard.id;
+                if (id) {
+                    dojo.addClass(id, 'iot-clickable');
+                    this.connect($(id), 'onclick', 'onEndTurnDiscardCard');
+                }
+            }
+        },
+
+        setupPlayerTurn: function (args)
+        {
+            this.highlightTakeCards();
+            this.highlightBuildCards(args);
+            this.highlightLoadCards(args);
+        },
 
 
         ///////////////////////////////////////////////////
@@ -171,39 +231,26 @@ function (dojo, declare) {
         
         */
         
-        /* Example:
-        
-        onMyMethodToCall1: function( evt )
+        onEndTurnDiscardCard: function (event)
         {
-            console.log( 'onMyMethodToCall1' );
+            console.log(this.checkAction(END_TURN_DISCARD));
+            dojo.stopEvent(event);
+            const cardId = event.target.attributes['card_id'].value;
+            this.utilities.triggerPlayerAction(END_TURN_DISCARD, { cardId: cardId });
+        },
             
-            // Preventing default browser reaction
-            dojo.stopEvent( evt );
+        onTakeCard: function (event)
+        {
+            dojo.stopEvent(event);
+            const cardId = event.target.attributes['card_id'].value;
+            this.actionManager.performAction(DRAW_CARD, { cardId: cardId });
+        },
 
-            // Check that this action is possible (see "possibleactions" in states.inc.php)
-            if( ! this.checkAction( 'myAction' ) )
-            {   return; }
-
-            this.ajaxcall( "/isletrains/isletrains/myAction.html", { 
-                                                                    lock: true, 
-                                                                    myArgument1: arg1, 
-                                                                    myArgument2: arg2,
-                                                                    ...
-                                                                 }, 
-                         this, function( result ) {
-                            
-                            // What to do after the server call if it succeeded
-                            // (most of the time: nothing)
-                            
-                         }, function( is_error) {
-
-                            // What to do after the server call in anyway (success or failure)
-                            // (most of the time: nothing)
-
-                         } );        
-        },        
-        
-        */
+        onTakeTopCard: function (event)
+        {
+            dojo.stopEvent(event);
+            this.actionManager.performAction(DRAW_DECK_CARD, {});
+        },
 
         
         ///////////////////////////////////////////////////

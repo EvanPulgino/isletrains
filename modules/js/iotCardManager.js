@@ -181,9 +181,84 @@ define([
             this.deckCounter.incValue(delta);
         },
 
+        canBuild: function (card, cardsInTrain, canSpend)
+        {
+            if (card.type != ENGINE && card.cost <= canSpend) {
+                return true;
+            }
+            if (card.type != CABOOSE && card.type != BUILDING) {
+                const highestCost = this.getHighestEligibleCost(card.type, cardsInTrain);
+                if (highestCost > 0 && (card.cost - highestCost) <= canSpend) {
+                    return true;
+                }
+            }
+            return false;
+        },
+
+        canDeliver: function ()
+        {
+
+        },
+        
+        canLoad: function (card, cardsInHand, passengers)
+        {
+            if (card.holds == PASSENGER && passengers.length > 0) {
+                return true;
+            }
+
+            for (let cardsInHandKey in cardsInHand) {
+                const handCard = cardsInHand[cardsInHandKey];
+                if (handCard.cargo == card.holds || handCard.cargo == ANY) {
+                    return true;
+                }
+            }
+        },
+
+        getHighestEligibleCost: function (type, cardsInTrain)
+        {
+            let highestCost = 0;
+            for (let cardsInTrainKey in cardsInTrain) {
+                const card = cardsInTrain[cardsInTrainKey];
+                if (card.type == type && card.cost > highestCost) {
+                    highestCost = card.cost;
+                }
+            }
+            return highestCost;
+        },
+
         setupNotifications: function ()
         {
+            dojo.subscribe(DISCARD_CARD, this, 'notif_discardCard');
             dojo.subscribe(DRAW_CARD, this, 'notif_drawCard');
+        },
+
+        notif_discardCard: function (notif)
+        {
+            const playerId = this.game.getActivePlayerId();
+            const card = notif.args.card;
+            const cardElement = 'iot_card_' + card.id;
+            const discardPile = 'iot_discard';
+
+            if (this.game.isCurrentPlayerActive()) {
+                $(cardElement).style.removeProperty('order');
+                this.attachToNewParent(cardElement, discardPile);
+                var moveCard = this.slideToObject(cardElement, discardPile).play();
+                on(moveCard, "End", function () {
+                    $(cardElement).style.removeProperty('top');
+                    $(cardElement).style.removeProperty('left');
+                });
+            } else {
+                const cardDiv = 'iot_hand_card_count_container_' + playerId;
+                this.createCard(card, cardDiv, card.locationArg * -1, true, false);
+                this.attachToNewParent(cardElement, discardPile);
+                var moveCard = this.slideToObject(cardElement, discardPile).play();
+                on(moveCard, "End", function () {
+                    $(cardElement).style.removeProperty('top');
+                    $(cardElement).style.removeProperty('left');
+                });
+            }
+
+            this.game.playerManager.incrementPlayerHandCounter(playerId, -1);
         },
 
         notif_drawCard: function (notif)
@@ -208,7 +283,7 @@ define([
                 on(moveCard, "End", function () {
                     $(cardElement).style.removeProperty('top');
                     $(cardElement).style.removeProperty('left');
-                })
+                });
             } else {
                 const activePlayerCardCounter = 'iot_hand_card_count_container_' + playerId;
                 this.game.slideToObjectAndDestroy(cardElement, activePlayerCardCounter);

@@ -40,8 +40,9 @@ class IsleTrains extends Table
         self::initGameStateLabels( array(
             ACTION_NUMBER => 10,
             CURRENT_PROGRESS => 11,
-            IS_BONUS_ACTION => 12,
-            SELECTED_ACTION => 13,
+            DISCARD_NUMBER => 12,
+            IS_BONUS_ACTION => 13,
+            SELECTED_ACTION => 14,
         ));
 
         $this->actionManager = new IsleOfTrainsActionManager($this);
@@ -210,6 +211,13 @@ class IsleTrains extends Table
             'passengers' => $this->passengerManager->getUiData(TABLEAU, self::getActivePlayerId()),
             'ticketPassengers' => $this->passengerManager->getUiData(TICKET),
             'tickets' => $this->ticketManager->getUiData(),
+        );
+    }
+
+    function argsPlayerTurnDiscard()
+    {
+        return array(
+            'discardNumber' => $this->actionManager->getDiscardNumber(),
         );
     }
 

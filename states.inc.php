@@ -58,17 +58,27 @@ $machinestates = array(
         "description" => "",
         "type" => "manager",
         "action" => "stGameSetup",
-        "transitions" => array( "" => STATE_PLAYER_TURN )
+        "transitions" => array("" => STATE_PLAYER_TURN)
     ),
-    
+
     STATE_PLAYER_TURN => array(
         "name" => PLAYER_TURN,
         "description" => clienttranslate('${actplayer} must perform their ${actionNumberText} action'),
         "descriptionmyturn" => clienttranslate('${you} must perform your ${actionNumberText} action'),
         "type" => "activeplayer",
         "args" => "argsPlayerTurn",
-        "possibleactions" => array( PERFORM_ACTION ),
-        "transitions" => array( NEXT_ACTION => STATE_PLAYER_TURN, NEXT_PLAYER => STATE_NEXT_PLAYER )
+        "possibleactions" => array(PERFORM_ACTION),
+        "transitions" => array(NEXT_ACTION => STATE_PLAYER_TURN, NEXT_PLAYER => STATE_NEXT_PLAYER, PLAYER_DISCARD => STATE_PLAYER_DISCARD)
+    ),
+
+    STATE_PLAYER_DISCARD => array(
+        "name" => PLAYER_DISCARD,
+        "description" => clienttranslate('${actplayer} must discard ${discardNumber} cards'),
+        "descriptionmyturn" => clienttranslate('${you} must discard ${discardNumber} cards'),
+        "type" => "activeplayer",
+        "args" => "argsPlayerTurnDiscard",
+        "possibleactions" => array(END_TURN_DISCARD),
+        "transitions" => array(NEXT_PLAYER => STATE_NEXT_PLAYER, PLAYER_DISCARD => STATE_PLAYER_DISCARD),
     ),
 
     STATE_NEXT_PLAYER => array(

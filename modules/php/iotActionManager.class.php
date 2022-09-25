@@ -26,13 +26,25 @@ class IsleOfTrainsActionManager extends APP_GameClass
     public function setupNewGame()
     {
         $this->game->setGameStateInitialValue(ACTION_NUMBER, 1);
+        $this->game->setGameStateInitialValue(DISCARD_NUMBER, 0);
         $this->game->setGameStateInitialValue(IS_BONUS_ACTION, REGULAR);
         $this->game->setGameStateInitialValue(SELECTED_ACTION, 0);
+    }
+
+    public function incDiscardNumber($delta)
+    {
+        $currentValue = $this->getDiscardNumber();
+        $this->setDiscardNumber($currentValue + $delta);
     }
 
     public function getActionNumber()
     {
         return $this->game->getGameStateValue(ACTION_NUMBER);
+    }
+
+    public function getDiscardNumber()
+    {
+        return $this->game->getGameStateValue(DISCARD_NUMBER);
     }
 
     public function getSelectedAction()
@@ -58,7 +70,7 @@ class IsleOfTrainsActionManager extends APP_GameClass
                 break;
             case DRAW_DECK_CARD:
                 $this->game->cardManager->drawDeckCard($actionArgs);
-                break;
+                break;                
             default:
                 break;
         }
@@ -71,7 +83,13 @@ class IsleOfTrainsActionManager extends APP_GameClass
                 $this->game->gamestate->nextState(NEXT_ACTION);
             } else {
                 $this->setActionNumber(1);
-                $this->game->gamestate->nextState(NEXT_PLAYER);
+                $playerHandSize = count($this->game->cardManager->getCards(HAND, $this->game->getActivePlayerId()));
+                if($playerHandSize > 5) {
+                    $this->setDiscardNumber($playerHandSize - 5);
+                    $this->game->gamestate->nextState(PLAYER_DISCARD);
+                } else {
+                    $this->game->gamestate->nextState(NEXT_PLAYER);
+                }
             }
         }
     }
@@ -79,6 +97,11 @@ class IsleOfTrainsActionManager extends APP_GameClass
     public function setActionNumber($actionNumber)
     {
         $this->game->setGameStateValue(ACTION_NUMBER, $actionNumber);
+    }
+
+    public function setDiscardNumber($discardNumber)
+    {
+        $this->game->setGameStateValue(DISCARD_NUMBER, $discardNumber);
     }
 
     public function setIsBonusAction($actionCategory)

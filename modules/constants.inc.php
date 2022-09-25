@@ -21,9 +21,11 @@ define('ACTION', 'action');
 define('BUILD', 'build');
 define('DELIVER', 'deliver');
 define('DELIVER_OR_LOAD', 'deliverOrLoad');
+define('DISCARD_CARD', 'discardCard');
 define('DISCARD_CARDS', 'discardCards');
 define('DRAW_CARD', 'drawCard');
 define('DRAW_DECK_CARD', 'drawDeckCard');
+define('END_TURN_DISCARD', 'endTurnDiscard');
 define('GAIN_ABILITY', 'gainAbility');
 define('GAIN_END_GAME_SCORING', 'gainEndGameScoring');
 define('LOAD', 'load');
@@ -86,6 +88,7 @@ define('ZOMBIE', 'zombie');
  */
 define('STATE_GAME_SETUP', 1);
 define('STATE_PLAYER_TURN', 2);
+define('STATE_PLAYER_DISCARD', 3);
 define('STATE_NEXT_PLAYER', 10);
 define('STATE_GAME_END', 99);
 
@@ -96,6 +99,7 @@ define('END_GAME', 'endGame');
 define('NEXT_ACTION', 'nextAction');
 define('NEXT_PLAYER', 'nextPlayer');
 define('NEXT_TURN', 'nextTurn');
+define('PLAYER_DISCARD', 'playerDiscard');
 define('PLAYER_TURN', 'playerTurn');
 
 /**
@@ -103,6 +107,7 @@ define('PLAYER_TURN', 'playerTurn');
  */
 define('ACTION_NUMBER', 'actionNumber');
 define('CURRENT_PROGRESS', 'currentProgress');
+define('DISCARD_NUMBER', 'discardNumber');
 define('IS_BONUS_ACTION', 'isBonusAction');
 define('SELECTED_ACTION', 'selectedAction');
 

@@ -39,6 +39,14 @@ class action_isletrains extends APP_GameAction
     }
   }
 
+  public function endTurnDiscard()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg("cardId", AT_posint, true);
+    $this->game->cardManager->endTurnDiscard($cardId);
+    self::ajaxResponse();
+  }
+
   public function performAction()
   {
     self::setAjaxMode();
