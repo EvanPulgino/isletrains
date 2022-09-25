@@ -58,8 +58,9 @@ class IsleOfTrainsCardManager extends APP_GameClass
         $this->cards->pickCardsForLocation(3, DECK, DISPLAY);
     }
 
-    public function drawCard($cardId)
+    public function drawCard($args)
     {
+        $cardId = $args['cardId'];
         $activePlayer = $this->game->getActivePlayerId();
         $card = self::moveCard($cardId, HAND, $activePlayer);
         $this->game->notifyAllPlayers(
@@ -74,7 +75,7 @@ class IsleOfTrainsCardManager extends APP_GameClass
         );
     }
 
-    public function drawDeckCard()
+    public function drawDeckCard($args)
     {
         $activePlayer = $this->game->getActivePlayerId();
         $drawnCard = self::drawTopCardFromDeck($activePlayer);

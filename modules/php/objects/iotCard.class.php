@@ -45,7 +45,8 @@ class IsleOfTrainsCard extends APP_GameClass
     private $weight;
     private $cargo;
     private $actionTypes;
-    private $cssClass;
+
+    private $compositeOrder;
 
     public function __construct($game, $row)
     {
@@ -68,6 +69,7 @@ class IsleOfTrainsCard extends APP_GameClass
         $this->cargo = $material[CARGO];
         $this->actionTypes = self::buildActionTypesArray($material[ACTION_TYPES]);
         $this->cssClass = 'iot-card-' . $this->type . '-' . $this->typeArg;
+        $this->compositeOrder = intval(strval($this->type) . strval($this->typeArg - 1));
     }
 
     public function getId() { return $this->id; }
@@ -86,6 +88,7 @@ class IsleOfTrainsCard extends APP_GameClass
     public function getCargo() { return $this->cargo; }
     public function getActionTypes() { return $this->actionTypes; }
     public function getCssClass() { return $this->cssClass; }
+    public function getCompositeOrder() { return $this->compositeOrder; }
 
     public function getUiData()
     {
@@ -111,6 +114,7 @@ class IsleOfTrainsCard extends APP_GameClass
             'cargo' => $this->cargo,
             'actionTypes' => $actionTypeUiData,
             'cssClass' => $this->cssClass,
+            'compositeOrder' => $this->compositeOrder,
         ];
     }
 

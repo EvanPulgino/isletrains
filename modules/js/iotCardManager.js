@@ -59,7 +59,7 @@ define([
                 this.game.playerManager.incrementPlayerHandCounterNoAnimation(card.locationArg, 1);
                 if (card.locationArg == this.game.getCurrentPlayerId()) {
                     const cardDiv = 'iot_current_player_hand';
-                    this.createCard(card, cardDiv, card.type);
+                    this.createCard(card, cardDiv, card.compositeOrder);
                 }
             }
 
@@ -67,7 +67,7 @@ define([
             for (let cardsInTrainKey in gamedata.cardsInTrain) {
                 const card = gamedata.cardsInTrain[cardsInTrainKey];
                 const cardDiv = 'iot_player_train_' + card.locationArg;
-                this.createCard(card, cardDiv, card.type);
+                this.createCard(card, cardDiv, card.compositeOrder);
             }
 
             this.setupNotifications();
@@ -197,7 +197,7 @@ define([
                 const activePlayerHand = 'iot_current_player_hand';
 
                 $(cardElement).style.removeProperty('order');
-                dojo.setStyle(cardElement, 'order', card.type);
+                dojo.setStyle(cardElement, 'order', card.compositeOrder);
 
                 this.attachToNewParent(cardElement, activePlayerHand);
                 var moveCard = this.slideToObject(cardElement, activePlayerHand).play();

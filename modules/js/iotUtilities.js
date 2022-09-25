@@ -24,7 +24,7 @@ define([
         constructor: function(game) {
             this.game = game;
         },
- 
+        
         /**
          * Gives javascript access to constants defined in PHP
          * @param {Object} userConstants Defined user constants
@@ -115,7 +115,7 @@ define([
             }
             return objects;
         },
-  
+
         /**
          * Trigger an ajax call for a player action
          * @param {string} actionName Name of the action
@@ -132,7 +132,7 @@ define([
                     args = [];
                 }
                 args.lock = true;
-  
+
                 this.game.ajaxcall(this.getActionUrl(actionName), args, this, function (result) {
                 }, function (error) {
                     if (error) {

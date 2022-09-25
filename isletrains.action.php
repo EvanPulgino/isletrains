@@ -39,19 +39,33 @@ class action_isletrains extends APP_GameAction
     }
   }
 
-  public function drawCard()
+  public function performAction()
   {
     self::setAjaxMode();
-    $cardId = self::getArg("cardId", AT_posint, true);
-    $this->game->cardManager->drawCard($cardId);
+    $actionType = self::getArg("actionType", AT_alphanum, true);
+    $args = self::getArg("actionArgs", AT_json, true);
+    $this->validateJsonAlphaNum($args, "actionArgs");
+    $this->game->actionManager->performAction($actionType, $args);
     self::ajaxResponse();
   }
-
-  public function drawDeckCard()
+  
+  private function validateJsonAlphaNum($value, $argName = 'unknown')
   {
-    self::setAjaxMode();
-    $this->game->cardManager->drawDeckCard();
-    self::ajaxResponse();
+    if (is_array($value)) {
+      foreach ($value as $key => $v) {
+        $this->validateJsonAlphaNum($key, $argName);
+        $this->validateJsonAlphaNum($v, $argName);
+      }
+      return true;
+    }
+    if (is_int($value)) {
+      return true;
+    }
+    $bValid = preg_match("/^[_0-9a-zA-Z- ]*$/", $value) === 1;
+    if (!$bValid) {
+      throw new BgaSystemException("Bad value for: $argName", true, true, FEX_bad_input_argument);
+    }
+    return true;
   }
 }
   

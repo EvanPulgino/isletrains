@@ -84,6 +84,7 @@ function (dojo, declare) {
         //
         onEnteringState: function(stateName, args)
         {
+            console.log(stateName);
             switch(stateName)
             {
                 case PLAYER_TURN:

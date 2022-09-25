@@ -328,10 +328,10 @@ html {
 #iot_progress_track_space_4 { left: 360px; position: relative; }
 #iot_progress_track_space_5 { left: 473px; position: relative; }
 #iot_progress_track_space_6 { left: 587px; position: relative; }
-#iot_progress_track_space_7 { right: -80px; bottom: 0; position: absolute; }
+#iot_progress_track_space_7 { right: -100px; bottom: 0; position: absolute; }
 
 #iot_passenger_count {
-    font-size: 1rem;
+    font-size: 40px;
     color: whitesmoke;
     text-shadow: .05rem 0 .05rem lightslategray, 0 -.05rem .05rem lightslategray, 0 .05rem .05rem lightslategray, -.05rem 0 .05rem lightslategray;
 }
@@ -483,8 +483,8 @@ div.iot-passenger:hover {
 .iot-passenger-bag {
     display: grid;
     position: relative;
-    width: 75px;
-    height: 75px;
+    width: 98px;
+    height: 80px;
     background-image: url('img/iotPassengerBag.png');
     place-content: center;
 }

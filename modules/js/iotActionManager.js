@@ -102,21 +102,37 @@ define([
         {
             dojo.addClass('iot_deck_counter_container', 'iot-clickable');
             this.connect($('iot_deck_counter_container'), 'onclick', 'onTakeTopCard');
-            dojo.query('#iot_card_display > div').addClass('iot-clickable');
-            dojo.query('#iot_card_display > div').connect('onclick', this, 'onTakeCard');
+            const displayCards = dojo.query('#iot_card_display > div');
+            for (let displayCardsKey in displayCards) {
+                const displayCard = displayCards[displayCardsKey];
+                const id = displayCard.id;
+                if (id) {
+                    dojo.addClass(id, 'iot-clickable');
+                    this.connect($(id), 'onclick', 'onTakeCard');
+                }
+            }
+        },
+
+        performAction: function (actionType, args)
+        {
+            if (this.game.isCurrentPlayerActive() && this.game.checkAction(PERFORM_ACTION)) {
+                this.disconnectAll();
+            }
+            const actionArgs = JSON.stringify(args)
+            this.game.utilities.triggerPlayerAction(PERFORM_ACTION, {actionType: actionType, actionArgs: actionArgs});
         },
 
         onTakeCard: function (event)
         {
             dojo.stopEvent(event);
             const cardId = event.target.attributes['card_id'].value;
-            this.game.utilities.triggerPlayerAction(DRAW_CARD, { cardId: cardId });
+            this.performAction(DRAW_CARD, { cardId: cardId });
         },
 
         onTakeTopCard: function (event)
         {
             dojo.stopEvent(event);
-            this.game.utilities.triggerPlayerAction(DRAW_DECK_CARD, {});
+            this.performAction(DRAW_DECK_CARD, {});
         },
 
         setupPlayerTurn: function (args)

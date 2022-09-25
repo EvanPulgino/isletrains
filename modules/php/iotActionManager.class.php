@@ -26,6 +26,7 @@ class IsleOfTrainsActionManager extends APP_GameClass
     public function setupNewGame()
     {
         $this->game->setGameStateInitialValue(ACTION_NUMBER, 1);
+        $this->game->setGameStateInitialValue(IS_BONUS_ACTION, REGULAR);
         $this->game->setGameStateInitialValue(SELECTED_ACTION, 0);
     }
 
@@ -39,12 +40,53 @@ class IsleOfTrainsActionManager extends APP_GameClass
         return $this->game->getGameStateValue(SELECTED_ACTION);
     }
 
-    public function setActionNumber($action_number)
+    public function isBonusAction() 
     {
-        $this->game->setGameStateValue(ACTION_NUMBER, $action_number);
+        $isBonus = $this->game->getGameStateValue(IS_BONUS_ACTION);
+        return $isBonus == BONUS ? true : false;
     }
 
-    public function setSelectionAction($selected_action)
+    public function performAction($actionType, $actionArgs)
+    {
+        $this->game->checkAction(PERFORM_ACTION);
+        $isBonusAction = $this->isBonusAction();
+
+        switch($actionType)
+        {
+            case DRAW_CARD:
+                $this->game->cardManager->drawCard($actionArgs);
+                break;
+            case DRAW_DECK_CARD:
+                $this->game->cardManager->drawDeckCard($actionArgs);
+                break;
+            default:
+                break;
+        }
+
+        if($isBonusAction) {
+            // handle bonus action
+        } else {
+            if ($this->getActionNumber() == 1) {
+                $this->setActionNumber(2);
+                $this->game->gamestate->nextState(NEXT_ACTION);
+            } else {
+                $this->setActionNumber(1);
+                $this->game->gamestate->nextState(NEXT_PLAYER);
+            }
+        }
+    }
+
+    public function setActionNumber($actionNumber)
+    {
+        $this->game->setGameStateValue(ACTION_NUMBER, $actionNumber);
+    }
+
+    public function setIsBonusAction($actionCategory)
+    {
+        $this->game->setGameStateValue(IS_BONUS_ACTION, $actionCategory);
+    }
+
+    public function setSelectedAction($selected_action)
     {
         $this->game->setGameStateValue(SELECTED_ACTION, $selected_action);
     }

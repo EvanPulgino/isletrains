@@ -27,6 +27,7 @@ define('DRAW_DECK_CARD', 'drawDeckCard');
 define('GAIN_ABILITY', 'gainAbility');
 define('GAIN_END_GAME_SCORING', 'gainEndGameScoring');
 define('LOAD', 'load');
+define('PERFORM_ACTION', 'performAction');
 define('TAKE_CARDS', 'takeCards');
 define('TAKE_CARDS_DISCARD', 'takeCardsDiscard');
 define('TAKE_PASSENGERS', 'takePassengers');
@@ -85,7 +86,7 @@ define('ZOMBIE', 'zombie');
  */
 define('STATE_GAME_SETUP', 1);
 define('STATE_PLAYER_TURN', 2);
-define('STATE_NEXT_PLAYER', 3);
+define('STATE_NEXT_PLAYER', 10);
 define('STATE_GAME_END', 99);
 
 /**
@@ -102,7 +103,14 @@ define('PLAYER_TURN', 'playerTurn');
  */
 define('ACTION_NUMBER', 'actionNumber');
 define('CURRENT_PROGRESS', 'currentProgress');
+define('IS_BONUS_ACTION', 'isBonusAction');
 define('SELECTED_ACTION', 'selectedAction');
+
+/**
+ * GLOBAL VARIABLE VALUES
+ */
+define('BONUS', 1);
+define('REGULAR', 2);
 
 /**
  * FLIPPED STATUS

@@ -40,7 +40,8 @@ class IsleTrains extends Table
         self::initGameStateLabels( array(
             ACTION_NUMBER => 10,
             CURRENT_PROGRESS => 11,
-            SELECTED_ACTION => 12,
+            IS_BONUS_ACTION => 12,
+            SELECTED_ACTION => 13,
         ));
 
         $this->actionManager = new IsleOfTrainsActionManager($this);
@@ -201,6 +202,7 @@ class IsleTrains extends Table
     function argsPlayerTurn()
     {
         return array(
+            'actionNumberText' => $this->actionManager->getActionNumber() == 1 ? clienttranslate('first') : clienttranslate('second'),
             'cardsInCargo' => $this->cardManager->getUiData(CARGO, self::getActivePlayerId()),
             'cardsInHand' => $this->cardManager->getUiData(HAND, self::getActivePlayerId()),
             'cardsInTrain' => $this->cardManager->getUiData(TRAIN),

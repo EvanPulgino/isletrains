@@ -63,14 +63,14 @@ $machinestates = array(
     
     STATE_PLAYER_TURN => array(
         "name" => PLAYER_TURN,
-        "description" => clienttranslate('${actplayer} must select an action to perform'),
-        "descriptionmyturn" => clienttranslate('${you} must select an action to perform'),
+        "description" => clienttranslate('${actplayer} must perform their ${actionNumberText} action'),
+        "descriptionmyturn" => clienttranslate('${you} must perform your ${actionNumberText} action'),
         "type" => "activeplayer",
         "args" => "argsPlayerTurn",
-        "possibleactions" => array( BUILD, DELIVER, LOAD, DRAW_CARD, DRAW_DECK_CARD ),
+        "possibleactions" => array( PERFORM_ACTION ),
         "transitions" => array( NEXT_ACTION => STATE_PLAYER_TURN, NEXT_PLAYER => STATE_NEXT_PLAYER )
     ),
-    
+
     STATE_NEXT_PLAYER => array(
         "name" => NEXT_PLAYER,
         "description" => '',
