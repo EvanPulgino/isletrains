@@ -26,11 +26,19 @@ define('DISCARD_CARD', 'discardCard');
 define('DISCARD_CARDS', 'discardCards');
 define('DRAW_CARD', 'drawCard');
 define('DRAW_DECK_CARD', 'drawDeckCard');
+define('DRAW_PASSENGER', 'drawPassenger');
 define('END_TURN_DISCARD', 'endTurnDiscard');
 define('GAIN_ABILITY', 'gainAbility');
 define('GAIN_END_GAME_SCORING', 'gainEndGameScoring');
 define('LOAD', 'load');
-define('PERFORM_ACTION', 'performAction');
+define('SELECT_ACTION', 'selectAction');
+define('SELECT_BUILD', 'selectBuild');
+define('SELECT_DELIVER', 'selectDeliver');
+define('SELECT_LOAD', 'selectLoad');
+define('SELECT_TAKE', 'selectTake');
+define('SELECT_BUILD_COST', 'selectBuildCost');
+define('SELECT_BUILD_TYPE', 'selectBuildType');
+define('TAKE', 'take');
 define('TAKE_CARDS', 'takeCards');
 define('TAKE_CARDS_DISCARD', 'takeCardsDiscard');
 define('TAKE_PASSENGERS', 'takePassengers');
@@ -88,20 +96,30 @@ define('ZOMBIE', 'zombie');
  * GAME STATES
  */
 define('STATE_GAME_SETUP', 1);
-define('STATE_PLAYER_TURN', 2);
-define('STATE_PLAYER_DISCARD', 3);
-define('STATE_NEXT_PLAYER', 10);
+define('STATE_PLAYER_SELECT_ACTION', 2);
+define('STATE_PLAYER_BUILD_ACTION', 3);
+define('STATE_PLAYER_DELIVER_ACTION', 4);
+define('STATE_PLAYER_LOAD_ACTION', 5);
+define('STATE_PLAYER_TAKE_ACTION', 6);
+define('STATE_END_ACTION', 10);
+define('STATE_PLAYER_DISCARD', 11);
+define('STATE_NEXT_PLAYER', 12);
 define('STATE_GAME_END', 99);
 
 /**
  * GAME STATE NAMES
  */
+define('END_ACTION', 'endAction');
 define('END_GAME', 'endGame');
 define('NEXT_ACTION', 'nextAction');
 define('NEXT_PLAYER', 'nextPlayer');
 define('NEXT_TURN', 'nextTurn');
 define('PLAYER_DISCARD', 'playerDiscard');
-define('PLAYER_TURN', 'playerTurn');
+define('PLAYER_SELECT_ACTION', 'playerSelectAction');
+define('PLAYER_BUILD_ACTION', 'playerBuildAction');
+define('PLAYER_DELIVER_ACTION', 'playerDeliverAction');
+define('PLAYER_LOAD_ACTION', 'playerLoadAction');
+define('PLAYER_TAKE_ACTION', 'playerTakeAction');
 
 /**
  * GLOBAL VARIABLES

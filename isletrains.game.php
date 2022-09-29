@@ -200,6 +200,13 @@ class IsleTrains extends Table
         game state.
     */
 
+    function argsPlayerSelectAction()
+    {
+        return array(
+            'actionNumberText' => $this->actionManager->getActionNumber() == 1 ? clienttranslate('first') : clienttranslate('second'),
+        );
+    }
+
     function argsPlayerTurn()
     {
         return array(
@@ -229,6 +236,27 @@ class IsleTrains extends Table
         Here, you can create methods defined as "game state actions" (see "action" property in states.inc.php).
         The action method of state X is called everytime the current game state is set to X.
     */
+
+    function stEndAction()
+    {
+        if($this->actionManager->isBonusAction()) {
+            // handle bonus action
+        } else {
+            if ($this->actionManager->getActionNumber() == 1) {
+                $this->actionManager->setActionNumber(2);
+                $this->gamestate->nextState(PLAYER_SELECT_ACTION);
+            } else {
+                $this->actionManager->setActionNumber(1);
+                $playerHandSize = count($this->cardManager->getCards(HAND, self::getActivePlayerId()));
+                if($playerHandSize > 5) {
+                    $this->actionManager->setDiscardNumber($playerHandSize - 5);
+                    $this->gamestate->nextState(PLAYER_DISCARD);
+                } else {
+                    $this->gamestate->nextState(NEXT_PLAYER);
+                }
+            }
+        }
+    }
     
     function stNextPlayer()
     {
@@ -240,7 +268,7 @@ class IsleTrains extends Table
         }
         $player_id = self::activeNextPlayer();
         self::giveExtraTime($player_id);
-        $this->gamestate->nextState("nextTurn");
+        $this->gamestate->nextState(NEXT_TURN);
     }
 
 //////////////////////////////////////////////////////////////////////////////

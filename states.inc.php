@@ -58,17 +58,40 @@ $machinestates = array(
         "description" => "",
         "type" => "manager",
         "action" => "stGameSetup",
-        "transitions" => array("" => STATE_PLAYER_TURN)
+        "transitions" => array("" => STATE_PLAYER_SELECT_ACTION)
     ),
 
-    STATE_PLAYER_TURN => array(
-        "name" => PLAYER_TURN,
-        "description" => clienttranslate('${actplayer} must perform their ${actionNumberText} action'),
-        "descriptionmyturn" => clienttranslate('${you} must perform your ${actionNumberText} action'),
+    STATE_PLAYER_SELECT_ACTION => array(
+        "name" => PLAYER_SELECT_ACTION,
+        "description" => clienttranslate('${actplayer} must select their ${actionNumberText} action'),
+        "descriptionmyturn" => clienttranslate('${you} must select your ${actionNumberText} action'),
         "type" => "activeplayer",
-        "args" => "argsPlayerTurn",
-        "possibleactions" => array(PERFORM_ACTION),
-        "transitions" => array(NEXT_ACTION => STATE_PLAYER_TURN, NEXT_PLAYER => STATE_NEXT_PLAYER, PLAYER_DISCARD => STATE_PLAYER_DISCARD)
+        "args" => "argsPlayerSelectAction",
+        "possibleactions" => array(SELECT_ACTION),
+        "transitions" => array(
+            SELECT_BUILD => STATE_PLAYER_BUILD_ACTION,
+            SELECT_DELIVER => STATE_PLAYER_DELIVER_ACTION,
+            SELECT_LOAD => STATE_PLAYER_LOAD_ACTION,
+            SELECT_TAKE => STATE_PLAYER_TAKE_ACTION,
+        )
+    ),
+
+    STATE_PLAYER_TAKE_ACTION => array(
+        "name" => PLAYER_TAKE_ACTION,
+        "description" => clienttranslate('${actplayer} must take a card or a passenger'),
+        "descriptionmyturn" => clienttranslate('${you} must take a card or a passenger'),
+        "type" => "activeplayer",
+        "possibleactions" => array(DRAW_CARD, DRAW_DECK_CARD, DRAW_PASSENGER),
+        "transitions" => array(END_ACTION => STATE_END_ACTION)
+    ),
+
+    STATE_END_ACTION => array(
+        "name" => END_ACTION,
+        "description" => '',
+        "type" => "game",
+        "action" => "stEndAction",
+        "updateGameProgression" => true,
+        "transitions" => array(PLAYER_SELECT_ACTION => STATE_PLAYER_SELECT_ACTION, PLAYER_DISCARD => STATE_PLAYER_DISCARD, NEXT_PLAYER => STATE_NEXT_PLAYER)
     ),
 
     STATE_PLAYER_DISCARD => array(
@@ -87,7 +110,7 @@ $machinestates = array(
         "type" => "game",
         "action" => "stNextPlayer",
         "updateGameProgression" => true,   
-        "transitions" => array( END_GAME => STATE_GAME_END, NEXT_TURN => STATE_PLAYER_TURN )
+        "transitions" => array( END_GAME => STATE_GAME_END, NEXT_TURN => STATE_PLAYER_SELECT_ACTION )
     ),
 
     // Final state.

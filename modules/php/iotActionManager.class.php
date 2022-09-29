@@ -37,6 +37,11 @@ class IsleOfTrainsActionManager extends APP_GameClass
         $this->setDiscardNumber($currentValue + $delta);
     }
 
+    public function getActionLabel($actionName)
+    {
+        return '<span class="' . $actionName . '-label">' . clienttranslate($actionName) . '</span>';
+    }
+
     public function getActionNumber()
     {
         return $this->game->getGameStateValue(ACTION_NUMBER);
@@ -58,40 +63,23 @@ class IsleOfTrainsActionManager extends APP_GameClass
         return $isBonus == BONUS ? true : false;
     }
 
-    public function performAction($actionType, $actionArgs)
+    public function selectAction($selectedAction)
     {
-        $this->game->checkAction(PERFORM_ACTION);
-        $isBonusAction = $this->isBonusAction();
-
-        switch($actionType)
+        switch($selectedAction)
         {
-            case DRAW_CARD:
-                $this->game->cardManager->drawCard($actionArgs);
-                break;
-            case DRAW_DECK_CARD:
-                $this->game->cardManager->drawDeckCard($actionArgs);
-                break;                
-            default:
+            case TAKE:
+                $this->game->gamestate->nextState(SELECT_TAKE);
                 break;
         }
 
-        if($isBonusAction) {
-            // handle bonus action
-        } else {
-            if ($this->getActionNumber() == 1) {
-                $this->setActionNumber(2);
-                $this->game->gamestate->nextState(NEXT_ACTION);
-            } else {
-                $this->setActionNumber(1);
-                $playerHandSize = count($this->game->cardManager->getCards(HAND, $this->game->getActivePlayerId()));
-                if($playerHandSize > 5) {
-                    $this->setDiscardNumber($playerHandSize - 5);
-                    $this->game->gamestate->nextState(PLAYER_DISCARD);
-                } else {
-                    $this->game->gamestate->nextState(NEXT_PLAYER);
-                }
-            }
-        }
+        $this->game->notifyAllPlayers(
+            SELECT_ACTION,
+            clienttranslate('${player_name} chooses to perform a ${selectedAction} action'),
+            array(
+                'player_name' => $this->game->getActivePlayerName(),
+                'selectedAction' => self::getActionLabel($selectedAction),
+            )
+        );
     }
 
     public function setActionNumber($actionNumber)

@@ -328,12 +328,90 @@ html {
 #iot_progress_track_space_4 { left: 360px; position: relative; }
 #iot_progress_track_space_5 { left: 473px; position: relative; }
 #iot_progress_track_space_6 { left: 587px; position: relative; }
-#iot_progress_track_space_7 { right: -100px; bottom: 0; position: absolute; }
+#iot_progress_track_space_7 { right: -120px; bottom: 0; position: absolute; }
 
 #iot_passenger_count {
     font-size: 40px;
     color: whitesmoke;
     text-shadow: .05rem 0 .05rem lightslategray, 0 -.05rem .05rem lightslategray, 0 .05rem .05rem lightslategray, -.05rem 0 .05rem lightslategray;
+}
+
+/* Buttons */
+#build_button {
+    color: #fff !important;
+    background-color: #4f555d !important;
+}
+
+#deliver_button {
+    color: #fff !important;
+    background-color: #652f06 !important;
+}
+
+#load_button {
+    color: #fff !important;
+    background-color: #be1a7d !important;
+}
+
+#take_button {
+    color: #fff !important;
+    background-color: #000 !important;
+}
+
+/* Labels */
+
+.build-label {
+    color: #4f555d !important;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.building-label {
+    color: #7822c3 !important;
+    font-weight: 800;
+}
+
+.caboose-label {
+    color: #3a6a2e !important;
+    font-weight: 800;
+}
+
+.deliver-label {
+    color: #652f06 !important;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.level-1-label {
+    color: #183d67 !important;
+    font-weight: 800;
+}
+
+.level-2-label {
+    color: #8b7b2d !important;
+    font-weight: 800;
+}
+
+.level-3-label {
+    color: #c22c38 !important;
+    font-weight: 800;
+}
+
+.level-4-label {
+    color: #535c6b !important;
+    font-weight: 800;
+}
+
+
+.load-label {
+    color: #be1a7d !important;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.take-label {
+    color: #000 !important;
+    font-weight: 800;
+    text-transform: capitalize;
 }
 
 /* Cards */
@@ -485,6 +563,7 @@ div.iot-passenger:hover {
     position: relative;
     width: 98px;
     height: 80px;
+    border-radius: 5px;
     background-image: url('img/iotPassengerBag.png');
     place-content: center;
 }

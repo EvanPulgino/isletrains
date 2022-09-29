@@ -65,15 +65,14 @@ class IsleOfTrainsCardManager extends APP_GameClass
             ADD_CARD_TO_DISPLAY,    
             clienttranslate('${cardName} added to display'),
             array(
-                'cardName' => $card->getName(),
+                'cardName' => self::getCardLabel($card),
                 'card' => $card->getUiData(),
             )
         );
     }
 
-    public function drawCard($args)
+    public function drawCard($cardId)
     {
-        $cardId = $args['cardId'];
         $activePlayer = $this->game->getActivePlayerId();
         $card = self::moveCard($cardId, HAND, $activePlayer);
         $this->game->notifyAllPlayers(
@@ -81,14 +80,16 @@ class IsleOfTrainsCardManager extends APP_GameClass
             clienttranslate('${player_name} takes ${cardName} into their hand'),
             array(
                 'player_name' => $this->game->getActivePlayerName(),
-                'cardName' => $card->getName(),
+                'cardName' => self::getCardLabel($card),
                 'card' => $card->getUiData(),
                 'fromDeck' => false,
             )
         );
+
+        $this->game->gamestate->nextState(END_ACTION);
     }
 
-    public function drawDeckCard($args)
+    public function drawDeckCard()
     {
         $activePlayer = $this->game->getActivePlayerId();
         $drawnCard = self::drawTopCardFromDeck($activePlayer);
@@ -101,6 +102,8 @@ class IsleOfTrainsCardManager extends APP_GameClass
                 'fromDeck' => true,
             )
         );
+
+        $this->game->gamestate->nextState(END_ACTION);
     }
 
     public function drawTopCardFromDeck($playerId)
@@ -117,7 +120,7 @@ class IsleOfTrainsCardManager extends APP_GameClass
             clienttranslate('${player_name} discards ${cardName}'),
             array(
                 'player_name' => $this->game->getActivePlayerName(),
-                'cardName' => $card->getName(),
+                'cardName' => self::getCardLabel($card),
                 'card' => $card->getUiData(),
             )
         );
@@ -138,6 +141,24 @@ class IsleOfTrainsCardManager extends APP_GameClass
     public function getCard($row)
     {
         return new IsleOfTrainsCard($this->game, $row);
+    }
+
+    public function getCardLabel($card)
+    {
+        $labelClass = '';
+        switch($card->getType()){
+            case BUILDING:
+                $labelClass = 'building-label';
+                break;
+            case CABOOSE:
+                $labelClass = 'caboose-label';
+                break;
+            default:
+                $labelClass = 'level-' . $card->getTypeArg() . '-label';
+                break;
+        }
+
+        return '<span class="' . $labelClass . '">' . clienttranslate($card->getName()) . '</span>';
     }
 
     /**

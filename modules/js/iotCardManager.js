@@ -43,7 +43,7 @@ define([
             for (let cardsInDisplayKey in gamedata.cardsInDisplay) {
                 const card = gamedata.cardsInDisplay[cardsInDisplayKey];
                 const cardDiv = 'iot_card_display';
-                this.createCard(card, cardDiv, 0);
+                this.createCard(card, cardDiv, false);
             }
 
             // Create discard
@@ -249,6 +249,7 @@ define([
                 $(cardElement).style.removeProperty('top');
                 $(cardElement).style.removeProperty('left');
             });
+            this.createCardTooltip(card);
             this.incrementDeckCounter(-1);
         },
 

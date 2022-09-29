@@ -86,14 +86,14 @@ function (dojo, declare) {
         {
             switch(stateName)
             {
-                case PLAYER_TURN:
-                    if (this.isCurrentPlayerActive()) {
-                        this.setupPlayerTurn(args.args);
-                    }
-                    break;
                 case PLAYER_DISCARD:
                     if (this.isCurrentPlayerActive()) {
                         this.setupPlayerEndTurnDiscard();
+                    }
+                    break;
+                case PLAYER_TAKE_ACTION:
+                    if (this.isCurrentPlayerActive()) {
+                        this.highlightTakeAction();
                     }
                     break;
                 default:
@@ -128,24 +128,24 @@ function (dojo, declare) {
         // onUpdateActionButtons: in this method you can manage "action buttons" that are displayed in the
         //                        action status bar (ie: the HTML links in the status bar).
         //        
-        onUpdateActionButtons: function(stateName, args)
+        onUpdateActionButtons: function (stateName, args)
         {                      
+            console.log(stateName);
             if(this.isCurrentPlayerActive())
-            {            
-                switch(stateName)
+            {
+                switch (stateName)
                 {
-/*               
-                 Example:
- 
-                 case 'myGameState':
-                    
-                    // Add 3 action buttons in the action status bar:
-                    
-                    this.addActionButton( 'button_1_id', _('Button 1 label'), 'onMyMethodToCall1' ); 
-                    this.addActionButton( 'button_2_id', _('Button 2 label'), 'onMyMethodToCall2' ); 
-                    this.addActionButton( 'button_3_id', _('Button 3 label'), 'onMyMethodToCall3' ); 
-                    break;
-*/
+                    case PLAYER_SELECT_ACTION:
+                        this.addActionButton('take_button', _('Take'), 'onClickTakeButton');
+                        this.addActionButton('build_button', _('Build'), 'onClickBuildButton');
+                        this.addActionButton('load_button', _('Load'), 'onClickLoadButton');
+                        this.addActionButton('deliver_button', _('Deliver'), 'onClickDeliverButton');
+
+                        this.addTooltip('take_button', '', _('Take 1 card or 1 passenger'));
+                        this.addTooltip('build_button', '', _('Build 1 card from your hand'));
+                        this.addTooltip('load_button', '', _('Load a card or a passenger onto a train'));
+                        this.addTooltip('deliver_button', '', _('Deliver cargo and/or passengers to a destination'));
+                        break;
                 }
             }
         },        
@@ -181,8 +181,10 @@ function (dojo, declare) {
             }
         },
 
-        highlightTakeCards: function()
+        highlightTakeAction: function()
         {
+            dojo.addClass('iot_passenger_bag', 'iot-clickable');
+            this.connect($('iot_passenger_bag'), 'onclick', 'onTakePassenger');
             dojo.addClass('iot_deck_counter_container', 'iot-clickable');
             this.connect($('iot_deck_counter_container'), 'onclick', 'onTakeTopCard');
             const displayCards = dojo.query('#iot_card_display > div');
@@ -231,25 +233,55 @@ function (dojo, declare) {
         
         */
         
+        onClickBuildButton: function (event)
+        {
+            console.log('BUILD');
+        },
+
+        onClickDeliverButton: function (event)
+        {
+            console.log('DELIVER');
+        },
+
+        onClickLoadButton: function (event)
+        {
+            console.log('LOAD');
+        },
+        
+        onClickTakeButton: function (event)
+        {
+            dojo.stopEvent(event);
+            this.onSelectAction(TAKE);
+        },
+
+        onSelectAction: function (selectedAction)
+        {
+            this.utilities.triggerPlayerAction(SELECT_ACTION, { selectedAction: selectedAction });
+        },
+        
         onEndTurnDiscardCard: function (event)
         {
-            console.log(this.checkAction(END_TURN_DISCARD));
             dojo.stopEvent(event);
             const cardId = event.target.attributes['card_id'].value;
             this.utilities.triggerPlayerAction(END_TURN_DISCARD, { cardId: cardId });
         },
-            
+
+        onTakePassenger: function (event)
+        {
+            console.log('TAKE PASSENGER');
+        },
+
         onTakeCard: function (event)
         {
             dojo.stopEvent(event);
             const cardId = event.target.attributes['card_id'].value;
-            this.actionManager.performAction(DRAW_CARD, { cardId: cardId });
+            this.utilities.triggerPlayerAction(DRAW_CARD, { cardId: cardId });
         },
 
         onTakeTopCard: function (event)
         {
             dojo.stopEvent(event);
-            this.actionManager.performAction(DRAW_DECK_CARD, {});
+            this.utilities.triggerPlayerAction(DRAW_DECK_CARD, {});
         },
 
         
