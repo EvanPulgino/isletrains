@@ -42,6 +42,8 @@ define([
                 this.createPlayerPointCounter(player);
                 this.createPlayerWeightCounter(player);
             }
+
+            this.setupNotifications();
         },
 
         createPlayerHandCounter: function (player)
@@ -75,6 +77,27 @@ define([
             const currentValue = this.playerHandCounters[playerId].getValue();
             const newValue = currentValue + delta > 0 ? currentValue + delta : 0;
             this.playerHandCounters[playerId].setValue(newValue);
+        },
+
+        incrementPlayerPointCounter: function (playerId, delta)
+        {
+            this.playerPointCounters[playerId].incValue(delta);
+            this.game.scoreCtrl[playerId].incValue(delta);
+        },
+
+        setupNotifications: function ()
+        {
+            dojo.subscribe(GAIN_VP, this, 'notif_gainVP');
+        },
+
+        notif_gainVP: function (notif)
+        {
+            const player = notif.args.player;
+            const amount = notif.args.amount;
+
+            console.log(player);
+
+            this.incrementPlayerPointCounter(player.id, amount);
         },
     });
 });

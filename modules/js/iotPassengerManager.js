@@ -18,6 +18,7 @@ var debug = isDebug ? console.info.bind(window.console) : function(){};
 define([
     'dojo',
     'dojo/_base/declare',
+    'dojo/on',
     'ebg/core/gamegui',
     'ebg/counter',
 ], (dojo, declare, on) => {
@@ -45,9 +46,10 @@ define([
             for (let ticketPassengersKey in gamedata.ticketPassengers) {
                 const passenger = gamedata.ticketPassengers[ticketPassengersKey];
                 const passengerDiv = 'iot_ticket_' + passenger.type + '_space_' + passenger.locationArg;
-                console.log(passengerDiv);
                 this.createPassenger(passenger, passengerDiv);
             }
+
+            this.setupNotifications();
         },
  
         createPassenger: function (passenger, parentDiv) {
@@ -55,6 +57,33 @@ define([
                 PASSENGER_ID: passenger.id,
                 PASSENGER_CLASS: passenger.cssClass,
             });
-        }
+        },
+
+        incrementRemainingPassengertCount(delta)
+        {
+            this.remainingPassengerCount.incValue(delta);
+        },
+
+        setupNotifications: function ()
+        {
+            dojo.subscribe(DRAW_PASSENGER, this, 'notif_drawPassenger');
+        },
+
+        notif_drawPassenger: function (notif)
+        {
+            const playerId = this.game.getActivePlayerId();
+            const passenger = notif.args.passenger;
+            this.createPassenger(passenger, 'iot_passenger_bag');
+            const passengerElement = 'iot_passenger_' + passenger.id;
+            const passengerArea = 'iot_player_passenger_area_' + playerId;
+            this.attachToNewParent(passengerElement, passengerArea);
+
+            var movePassenger = this.slideToObject(passengerElement, passengerArea).play();
+            on(movePassenger, "End", function () {
+                $(passengerElement).style.removeProperty('top');
+                $(passengerElement).style.removeProperty('left');
+            });
+            this.incrementRemainingPassengertCount(-1);
+        },
     });
 });

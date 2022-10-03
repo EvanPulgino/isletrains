@@ -160,4 +160,27 @@ class IsleOfTrainsPlayerManager extends APP_GameClass
 
         return false;
     }
+
+    public function playerGainVP($playerId, $amount, $source)
+    {
+        $player = self::getPlayer($playerId);
+        self::updatePlayerVP($player, $amount);
+        $this->game->notifyAllPlayers(
+            GAIN_VP,
+            clienttranslate('${player_name} gains ${amount} ${point} ${source}'),
+            array(
+                'player_name' => $this->game->getActivePlayerName(),
+                'player' => $player->getUiData(),
+                'amount' => $amount,
+                'point' => $amount == 1 ? clienttranslate('point') : clienttranslate('points'),
+                'source' => $source
+            )
+        );
+    }
+
+    private function updatePlayerVP($player, $delta) {
+        $newScore = $player->getScore() + $delta;
+        $sql = "UPDATE player SET player_score = '" . $newScore . "' WHERE player_id = '" . $player->getId() . "'";
+        self::DbQuery($sql);
+    }
 }

@@ -532,7 +532,6 @@ div.iot-card:hover {
     border: 1px solid;
     box-shadow: 1px 1px 1px 0 #000000a0;
     background-image: url('img/iotMiniCard.png');
-    margin-left: -16px;
     margin-right: 20px;
 }
 

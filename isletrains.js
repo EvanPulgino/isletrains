@@ -268,7 +268,8 @@ function (dojo, declare) {
 
         onTakePassenger: function (event)
         {
-            console.log('TAKE PASSENGER');
+            dojo.stopEvent(event);
+            this.utilities.triggerPlayerAction(DRAW_PASSENGER, {});
         },
 
         onTakeCard: function (event)

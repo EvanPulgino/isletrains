@@ -29,6 +29,7 @@ define('DRAW_DECK_CARD', 'drawDeckCard');
 define('DRAW_PASSENGER', 'drawPassenger');
 define('END_TURN_DISCARD', 'endTurnDiscard');
 define('GAIN_ABILITY', 'gainAbility');
+define('GAIN_VP', 'gainVP');
 define('GAIN_END_GAME_SCORING', 'gainEndGameScoring');
 define('LOAD', 'load');
 define('SELECT_ACTION', 'selectAction');

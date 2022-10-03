@@ -45,6 +45,36 @@ class IsleOfTrainsPassengerManager extends APP_GameClass
         }
     }
 
+    public function drawPassenger()
+    {
+        $activePlayer = $this->game->getActivePlayerId();
+        if (count(self::getPassengers(BAG)) > 0) {
+            $drawnPassenger = self::drawPassengerFromBag($activePlayer);
+            $this->game->notifyAllPlayers(
+                DRAW_PASSENGER,
+                clienttranslate('${player_name} draws a passenger from the bag'),
+                array(
+                    'player_name' => $this->game->getActivePlayerName(),
+                    'passenger' => $drawnPassenger->getUiData()
+                )
+            );
+        } else {
+            $this->game->playerManager->playerGainVP(
+                $activePlayer,
+                1,
+                clienttranslate('because passenger bag is empty')
+            );
+        }
+        
+
+        $this->game->gamestate->nextState(END_ACTION);
+    }
+
+    public function drawPassengerFromBag($playerId)
+    {
+        return self::getPassenger($this->passengers->pickCardForLocation(BAG, TABLEAU, $playerId));
+    }
+
     public function getPassenger($row)
     {
         return new IsleOfTrainsPassenger($this->game, $row);

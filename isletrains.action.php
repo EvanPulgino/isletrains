@@ -54,6 +54,13 @@ class action_isletrains extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function drawPassenger()
+  {
+    self::setAjaxMode();
+    $this->game->passengerManager->drawPassenger();
+    self::ajaxResponse();
+  }
+
   public function endTurnDiscard()
   {
     self::setAjaxMode();
